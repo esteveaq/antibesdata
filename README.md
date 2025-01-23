@@ -4,7 +4,7 @@
 
 ## Introduction
 
-This open data project is about promoting open data in the city of **Antibes Juan-Les-Pins** and encouraging the publication of quality datasets. My goal is to make data more enjoyable and accessible to everyone for educational and informative purposes. This initiative is in line with the [data.gouv.fr](https://www.data.gouv.fr/fr/) platform.
+This project is about promoting open data in the city of **Antibes Juan-Les-Pins** and encouraging the publication of quality datasets. My goal is to make data more enjoyable and accessible to everyone for educational and informative purposes. This initiative is in line with the [data.gouv.fr](https://www.data.gouv.fr/fr/) platform.
 
 ## Overview
 
