@@ -19,6 +19,7 @@ website:
   page-footer: 
     center: 
       - text: "Antibes Data - 2025"
+        href: https://esteveaq.github.io/antibesdata
       - icon: github
         href: https://github.com/esteveaq/antibesdata
       - icon: twitter-x 
