@@ -1,0 +1,931 @@
+[
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "organisateur",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "handisport antibes méditerranée",
+          "handisport antibes méditérranée"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "handisport antibes méditerranée"
+      },
+      {
+        "from": [
+          "c.n.a",
+          "cna"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "c.n.a"
+      },
+      {
+        "from": [
+          "asf antibes hockey",
+          "asf hockey antibes"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "asf antibes hockey"
+      },
+      {
+        "from": [
+          "velo sprint biotois",
+          "vélo sprint biotois"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "velo sprint biotois"
+      },
+      {
+        "from": [
+          "école d'escrime d'antibes",
+          "ecole d'escrime d'antibes"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "école d'escrime d'antibes"
+      },
+      {
+        "from": [
+          "eraa",
+          "e.r.a.a"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "eraa"
+      },
+      {
+        "from": [
+          "les petanquiers du port d'antibes",
+          "les pétanquiers du port d'antibes"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "les petanquiers du port d'antibes"
+      },
+      {
+        "from": [
+          "les amis de la pinède - la main tendue",
+          "les amis de la pinède/ la main tendue"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "les amis de la pinède - la main tendue"
+      },
+      {
+        "from": [
+          "sra",
+          "s.r.a"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "sra"
+      }
+    ],
+    "description": "Mass edit cells in column organisateur"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "organisateur",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "assa tennis",
+          "asoa tennis"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "asso tennis"
+      },
+      {
+        "from": [
+          "sophia club entreprises",
+          "sophia club entreprise"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "sophia club entreprises"
+      },
+      {
+        "from": [
+          "bde polytech nice sophia",
+          "bds polytech nice sophia"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "bde-bds polytech nice sophia"
+      },
+      {
+        "from": [
+          "as fontonne boule",
+          "as fontonne boules"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "as fontonne boule"
+      }
+    ],
+    "description": "Mass edit cells in column organisateur"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "organisateur",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "jeunesse sportive de juan-les-pins",
+          "jeunesse sportive de juan les pins"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "jeunesse sportive de juan-les-pins"
+      }
+    ],
+    "description": "Mass edit cells in column organisateur"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "organisateur",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "les amis de la pinède",
+          "les amis de la pinède - la main tendue",
+          "les amis de la pinède et bnai brith antibes"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "les amis de la pinède"
+      },
+      {
+        "from": [
+          "direction des sports de la ville d'antibes",
+          "direction des sports"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "direction des sports de la ville d'antibes"
+      },
+      {
+        "from": [
+          "département des alpes-maritimes",
+          "département des am"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "département des alpes-maritimes"
+      },
+      {
+        "from": [
+          "antibes triathlon",
+          "antibes triathlon + arc"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "antibes triathlon"
+      },
+      {
+        "from": [
+          "belles rives ski nautique club",
+          "belles rives ski nautique"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "belles rives ski nautique club"
+      },
+      {
+        "from": [
+          "association des commercants de la fontonne",
+          "association des commerçants"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "association des commercants"
+      },
+      {
+        "from": [
+          "as fontonne boule",
+          "as fontonne boule + comité des fêtes de la fontonne"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "as fontonne boule"
+      },
+      {
+        "from": [
+          "amicale du chien de travail d'antibes",
+          "amical du chien de travaill"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "amicale du chien de travail d'antibes"
+      },
+      {
+        "from": [
+          "direction jeunesse + direction des sports",
+          "direction jeunesse loisirs"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "direction jeunesse"
+      }
+    ],
+    "description": "Mass edit cells in column organisateur"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "organisateur",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "cdos",
+          "cdos 06"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "cdos 06"
+      },
+      {
+        "from": [
+          "studio danse",
+          "studio danse 06"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "studio danse 06"
+      }
+    ],
+    "description": "Mass edit cells in column organisateur"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "organisateur",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "as collège sidney bechet",
+          "collège sidney bechet"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "collège sidney bechet"
+      }
+    ],
+    "description": "Mass edit cells in column organisateur"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "organisateur",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "asf antibes hockey",
+          "asf hockey"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "asf antibes hockey"
+      },
+      {
+        "from": [
+          "société des régates d'antibes",
+          "vrc de la société des régates d'antibes"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "société des régates d'antibes"
+      },
+      {
+        "from": [
+          "comité dep d'étude et sport sous-marin",
+          "comité d’étude et des sports sous marins am"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "comité dep d'étude et sport sous-marin"
+      }
+    ],
+    "description": "Mass edit cells in column organisateur"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "organisateur",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "daye one antibes"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "daye one"
+      }
+    ],
+    "description": "Mass edit cells in column organisateur"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "organisateur",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "day one"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "day one"
+      }
+    ],
+    "description": "Mass edit cells in column organisateur"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "organisateur",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "daye one"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "day one"
+      }
+    ],
+    "description": "Mass edit cells in column organisateur"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "organisateur",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "cdos 06 + creps"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "cdos 06"
+      }
+    ],
+    "description": "Mass edit cells in column organisateur"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "organisateur",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "asf football"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "as fontonne football"
+      }
+    ],
+    "description": "Mass edit cells in column organisateur"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "organisateur",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "ville d'antibes"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "direction des sports de la ville d'antibes"
+      }
+    ],
+    "description": "Mass edit cells in column organisateur"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "organisateur",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "unss de district"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "unss"
+      }
+    ],
+    "description": "Mass edit cells in column organisateur"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "lieu_1",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "salle aaa",
+          "sallle aaa"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "salle aaa"
+      },
+      {
+        "from": [
+          "azurarena antibes",
+          "azur arena antibes"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "azurarena antibes"
+      },
+      {
+        "from": [
+          "juan-les-pins",
+          "juan les pins"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "juan-les-pins"
+      }
+    ],
+    "description": "Mass edit cells in column lieu_1"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "lieu_1",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "stade docteur léger",
+          "stade docteur léger t3",
+          "stade docteir léger",
+          "stade docteur léger t2"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "stade docteur léger"
+      },
+      {
+        "from": [
+          "stade de la fontonne",
+          "stade de la fontonne 3",
+          "stade de la fontonne t3"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "stade de la fontonne"
+      },
+      {
+        "from": [
+          "stade du fort carré",
+          "stade du fort carré + cap d'antibes",
+          "stade du fort carré pelouse"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "stade du fort carré"
+      },
+      {
+        "from": [
+          "parking du ponteil",
+          "parking du ponteil z3"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "parking du ponteil"
+      },
+      {
+        "from": [
+          "base nautique du ponteil",
+          "base nautique du ponteil + plage"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "base nautique du ponteil"
+      },
+      {
+        "from": [
+          "plage de la salis",
+          "plage de la sallis - bois de la garoupe"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "plage de la salis"
+      },
+      {
+        "from": [
+          "terrain n°1 de la fontonne",
+          "terrain n°3 de la fontonne"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "terrains de la fontonne"
+      },
+      {
+        "from": [
+          "place des martyrs de la résistance",
+          "place des martyres de la résistance"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "place des martyrs de la résistance"
+      }
+    ],
+    "description": "Mass edit cells in column lieu_1"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "lieu_1",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "plage des croûtons",
+          "plage du crouton"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "plage des croûtons"
+      }
+    ],
+    "description": "Mass edit cells in column lieu_1"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "lieu_1",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "stade du fort carré",
+          "stade fort carré"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "stade du fort carré"
+      },
+      {
+        "from": [
+          "stade nautique d'antibes",
+          "stade nautique antibes"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "stade nautique d'antibes"
+      },
+      {
+        "from": [
+          "stand de tir des 3 moulins",
+          "stand de tir - zi des 3 moulins"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "stand de tir des 3 moulins"
+      },
+      {
+        "from": [
+          "zi des 3 moulins",
+          "stade des 3 moulins"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "zi des 3 moulins"
+      },
+      {
+        "from": [
+          "base nautique du ponteil",
+          "base nautique ponteil"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "base nautique du ponteil"
+      }
+    ],
+    "description": "Mass edit cells in column lieu_1"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "lieu_1",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "stade du fort carré",
+          "plage du fort carré",
+          "terrains de 3x3 stade du fort carré"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "stade du fort carré"
+      },
+      {
+        "from": [
+          "stade du fort carré",
+          "fort carré",
+          "plage du fort carré"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "stade du fort carré"
+      },
+      {
+        "from": [
+          "stade nautique d'antibes",
+          "base nautique",
+          "base nautique d'antibes"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "stade nautique d'antibes"
+      },
+      {
+        "from": [
+          "port gallice",
+          "port et plage gallice"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "port gallice"
+      },
+      {
+        "from": [
+          "stade de la fontonne",
+          "stade fontonne n°3"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "stade de la fontonne"
+      },
+      {
+        "from": [
+          "stade du fort carré",
+          "plage du fort carré"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "stade du fort carré"
+      },
+      {
+        "from": [
+          "stade nautique d'antibes",
+          "base nautique d'antibes"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "stade nautique d'antibes"
+      },
+      {
+        "from": [
+          "square gould",
+          "square gould+ cap"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "square gould"
+      },
+      {
+        "from": [
+          "base nautique de la salis",
+          "base nautique salis"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "base nautique de la salis"
+      },
+      {
+        "from": [
+          "pinède gould",
+          "pinède"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "pinède gould"
+      },
+      {
+        "from": [
+          "club port vauban",
+          "port vauban"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "club port vauban"
+      },
+      {
+        "from": [
+          "ponteil",
+          "ponteil/salis"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "ponteil"
+      }
+    ],
+    "description": "Mass edit cells in column lieu_1"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "lieu_1",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "stade des semboules",
+          "tennis des semboules",
+          "parc des semboules",
+          "terrain des semboules"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "stade des semboules"
+      },
+      {
+        "from": [
+          "salle pierre brochard",
+          "salle brochard"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "salle pierre brochard"
+      },
+      {
+        "from": [
+          "salle saint claude",
+          "salle st claude"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "salle saint claude"
+      },
+      {
+        "from": [
+          "stand de tir des 3 moulins",
+          "stand de tir à l'arc des 3 moulins"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "stand de tir des 3 moulins"
+      },
+      {
+        "from": [
+          "esplanade de la gravette",
+          "plage de la gravette"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "esplanade de la gravette"
+      },
+      {
+        "from": [
+          "clos borriglion",
+          "clos de boules borriglion"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "clos borriglion"
+      },
+      {
+        "from": [
+          "base nautique du ponteil",
+          "salle associative base nautique du ponteil"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "base nautique du ponteil"
+      },
+      {
+        "from": [
+          "stade docteur léger",
+          "terrain n°1 du stade docteur léger"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "stade docteur léger"
+      },
+      {
+        "from": [
+          "plage de la salis",
+          "handi plage de la salis"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "plage de la salis"
+      }
+    ],
+    "description": "Mass edit cells in column lieu_1"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "lieu_1",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "square gould"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "pinède gould"
+      }
+    ],
+    "description": "Mass edit cells in column lieu_1"
+  }
+]

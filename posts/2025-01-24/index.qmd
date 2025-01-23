@@ -1,0 +1,100 @@
+---
+title: "Jardins partagés à Antibes"
+author: "Antibes Data"
+date: "2025-01-24"
+categories: [open data, antibes]
+image: "plots/plot_jardin_tree_m.jpg"
+abstract: Surface des jardins partagés en m2
+editor_options: 
+  chunk_output_type: console
+---
+
+# Introduction
+
+Ce poste rend compte de la surface des jardins partagés à Antibes Juan-les-Pins. Chaque rectangle est proportionnel à la surface en mètres carrés.
+
+# Résultats
+
+![](plots/plot_jardin_tree_m.jpg){fig-align="center"}
+
+# Code
+
+## Import
+
+```{r}
+#| message: false
+#| warning: false
+#| output: false
+
+library(tidyverse)
+library(readxl)
+library(treemapify)
+library(grid)
+
+date_caption <- "27 septembre 2024"
+source("tools/themes.R")
+
+jardins <- read_csv("posts/2025-01-24/data/antibes-jardins-partages.csv")
+glimpse(jardins)
+```
+
+## Clean
+
+```{r}
+#| message: false
+#| warning: false
+#| output: false
+jardins$site[jardins$site == 'Saint Maymes'] <- 
+  c("Saint Maymes 1", "Saint Maymes 2") # give a number to each duplicate value
+
+```
+
+## Analysis
+
+```{r}
+#| message: false
+#| warning: false
+
+jardins_tree <-
+jardins %>% 
+  summarize(site, surface_m2) 
+jardins_tree
+```
+
+## Plot
+
+```{r}
+#| message: false
+#| warning: false
+plot_jardin_tree <- 
+jardins_tree %>%
+  ggplot(aes(fill = site, area = surface_m2, label = paste0(site,sep = "\n", surface_m2, " m²"))) +
+  geom_treemap(color = "#FAE5C6", size = 5,  alpha = 1) +
+  geom_treemap_text(fontface = "bold", 
+                    colour = "white", 
+                    place = "center",
+                    family = setfont,
+                    grow = FALSE) + 
+  scale_fill_manual(values = custom_palette_treemap) +
+  theme(legend.position = "none")
+
+plot_jardin_tree <-
+plot_jardin_tree +
+  labs(title = "Les jardins partagés à Antibes Juan-les-Pins",
+       subtitle = "Surface des jardins partagés en m2",
+       caption = social_caption3) + tt5
+```
+
+## Render
+
+```{r}
+#| message: false
+#| warning: false
+#| fig-height: 8
+#| fig-width: 8
+plot_jardin_tree
+```
+
+# Source
+
+[Jardins partagés à Antibes Juan-les-Pins, disponible sur data.gouv.fr](https://www.data.gouv.fr/fr/datasets/jardins-partages-a-antibes-juan-les-pins/). Mise à jour du `{r} date_caption`

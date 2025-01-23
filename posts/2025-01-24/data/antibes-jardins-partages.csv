@@ -1,0 +1,9 @@
+coll_nom,coll_siret,site,statut,date_ouverture,adr_num,adr_voie,longitude,latitude,porteur_projet,gestionnaire_projet,surface_m2,nb_potagers,observations,equipements,mel_informations
+Antibes,21060004500012,Parc Estagnol,en fonctionnement,,195,chemin des plateaux Fleuris,7.099741069,43.58734736,ville d'antibes,Association des jardins de la tournière,800,11,,Eau;rangements outils,lesjardinsdelatourniere@gmail.com
+Antibes,21060004500012,Saint Maymes,en fonctionnement,,,Chemin des Eucalyptus,7.089200,43.579904,ville d'antibes,Association Emancip'action,1100,30,,Eau;rangements outils,emancipaction@free.fr
+Antibes,21060004500012,Saint Maymes,en fonctionnement,,,Chemin des Eucalyptus,7.089200,43.579904,ville d'antibes,Centre communal d'action sociale,500,,,Eau;rangements outils,animation@ccas-antibes.fr
+Antibes,21060004500012,Courbe,en fonctionnement,2021-06-01,6,avenue courbe,7.117075,43.583055,ville d'antibes,Association jardin paysan Courbe,420,8,,Eau;toilettes;rangements,jardinpaysancourbe@gmail.com
+Antibes,21060004500012,La Colle,en fonctionnement,2021-06-02,44,Chemin de la Colle,7.108930234339441,43.5755963276574,ville d'antibes,Association oliviers et petits pois,1600,20,,Eau;toilettes;rangements,femmeviking@gmail.com
+Antibes,21060004500012,Rabiac/Carriat,en fonctionnement,2021-10-19,,Angle Avenue Carriat/Chemin de Rabiac Estagnol,7.1069446206092834,43.58726035461811,ville d'antibes,Association Pot'potes,455,1,gestion collective,Eau;toilettes;rangements,maelle.johnson@gmail.com
+Antibes,21060004500012,Fontonne,en fonctionnement,2022-10-22,,Chemin des moyennes bréguières,7.1164842,43.6034812,ville d'antibes,Association jardin partagé le petit Ribier,613,16,,Eau;toilettes;rangements,fayrouz.aqachmar@gmail.com
+Antibes,21060004500012,Val Claret,en fonctionnement,2024-09-06,,Boulevard du Val Claret,7.124178413996247,43.59791386576902 ,ville d'antibes,Association les jardins du parc,591,20,,Eau;toilettes;rangements,lesjardinsduclaret@gmail.com

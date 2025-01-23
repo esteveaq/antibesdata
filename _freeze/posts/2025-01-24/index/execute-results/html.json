@@ -1,0 +1,17 @@
+{
+  "hash": "239809a6978b4f2d632d54a759158f82",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Jardins partagés à Antibes\"\nauthor: \"Antibes Data\"\ndate: \"2025-01-24\"\ncategories: [open data, antibes]\nimage: \"plots/plot_jardin_tree_m.jpg\"\nabstract: Surface des jardins partagés en m2\neditor_options: \n  chunk_output_type: console\n---\n\n\n\n# Introduction\n\nCe poste rend compte de la surface des jardins partagés à Antibes Juan-les-Pins. Chaque rectangle est proportionnel à la surface en mètres carrés.\n\n# Résultats\n\n![](plots/plot_jardin_tree_m.jpg){fig-align=\"center\"}\n\n# Code\n\n## Import\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse)\nlibrary(readxl)\nlibrary(treemapify)\nlibrary(grid)\n\ndate_caption <- \"27 septembre 2024\"\nsource(\"tools/themes.R\")\n\njardins <- read_csv(\"posts/2025-01-24/data/antibes-jardins-partages.csv\")\nglimpse(jardins)\n```\n:::\n\n\n\n## Clean\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\njardins$site[jardins$site == 'Saint Maymes'] <- \n  c(\"Saint Maymes 1\", \"Saint Maymes 2\") # give a number to each duplicate value\n```\n:::\n\n\n\n## Analysis\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\njardins_tree <-\njardins %>% \n  summarize(site, surface_m2) \njardins_tree\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n# A tibble: 8 × 2\n  site           surface_m2\n  <chr>               <dbl>\n1 Parc Estagnol         800\n2 Saint Maymes 1       1100\n3 Saint Maymes 2        500\n4 Courbe                420\n5 La Colle             1600\n6 Rabiac/Carriat        455\n7 Fontonne              613\n8 Val Claret            591\n```\n\n\n:::\n:::\n\n\n\n## Plot\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nplot_jardin_tree <- \njardins_tree %>%\n  ggplot(aes(fill = site, area = surface_m2, label = paste0(site,sep = \"\\n\", surface_m2, \" m²\"))) +\n  geom_treemap(color = \"#FAE5C6\", size = 5,  alpha = 1) +\n  geom_treemap_text(fontface = \"bold\", \n                    colour = \"white\", \n                    place = \"center\",\n                    family = setfont,\n                    grow = FALSE) + \n  scale_fill_manual(values = custom_palette_treemap) +\n  theme(legend.position = \"none\")\n\nplot_jardin_tree <-\nplot_jardin_tree +\n  labs(title = \"Les jardins partagés à Antibes Juan-les-Pins\",\n       subtitle = \"Surface des jardins partagés en m2\",\n       caption = social_caption3) + tt5\n```\n:::\n\n\n\n## Render\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nplot_jardin_tree\n```\n\n::: {.cell-output-display}\n![](index_files/figure-html/unnamed-chunk-5-1.png){width=768}\n:::\n:::\n\n\n\n# Source\n\n[Jardins partagés à Antibes Juan-les-Pins, disponible sur data.gouv.fr](https://www.data.gouv.fr/fr/datasets/jardins-partages-a-antibes-juan-les-pins/). Mise à jour du 27 septembre 2024\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

@@ -1,0 +1,70 @@
+---
+title: "Template"
+author: "Antibes Data"
+date: "2025-01-01"
+categories: [open data, antibes]
+image: "plots/"
+abstract: resume
+---
+
+# Introduction
+
+# Résultats
+
+![](plots/temperature%20eau_mois_m.png){fig-align="center"}
+
+# Code
+
+## Import
+
+```{r}
+#| message: false
+#| warning: false
+
+date_caption <- "[insert date] 1 janvier 2025"
+source("tools/themes.R") # themes
+
+```
+
+## Inspect
+
+```{r}
+
+```
+
+## Clean
+
+```{r}
+#| message: false
+#| warning: false
+#| output: false
+
+```
+
+## Plot
+
+```{r}
+#| message: false
+#| warning: false
+
+```
+
+## Render
+
+```{r}
+#| message: false
+#| warning: false
+#| fig-height: 12
+#| fig-width: 10
+
+```
+
+::: {.callout-caution collapse="true"}
+```         
+Callout
+```
+:::
+
+# Source
+
+[..., disponible sur data.gouv.fr](https://www.data.gouv.fr/fr/datasets/prenoms-des-nouveaux-nes-a-antibes/), mise à jour du `{r} date_caption`

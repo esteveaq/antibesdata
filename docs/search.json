@@ -1,0 +1,317 @@
+[
+  {
+    "objectID": "posts/2025-01-25/index.html",
+    "href": "posts/2025-01-25/index.html",
+    "title": "Fréquentation des musées d’Antibes",
+    "section": "",
+    "text": "Ce poste analyse le nombre de visiteurs dans les musées d’Antibes depuis 2008. Une animation est réalisée pour illustrer la baisse durant le COVID. Puis la reprise à des niveaux records. Les musées concernés sont le Musée Picasso et le Musée de l’Archéologie. Le nombre de visiteurs est agrégé sur ces deux musées."
+  },
+  {
+    "objectID": "posts/2025-01-25/index.html#import",
+    "href": "posts/2025-01-25/index.html#import",
+    "title": "Fréquentation des musées d’Antibes",
+    "section": "Import",
+    "text": "Import\n\nlibrary(tidyverse)\nlibrary(readxl)\nlibrary(showtext)\nlibrary(gganimate)\nlibrary(gifski)\n\ndate_caption &lt;- \"13 janvier 2025\"\nsource(\"tools/themes.R\")\n\nmusee_frequentation &lt;- read_csv(\"posts/2025-01-25/data/antibes-frequentation-musees-france.csv\")"
+  },
+  {
+    "objectID": "posts/2025-01-25/index.html#analysis",
+    "href": "posts/2025-01-25/index.html#analysis",
+    "title": "Fréquentation des musées d’Antibes",
+    "section": "Analysis",
+    "text": "Analysis\n\n# data to draw line geom \ndataplot &lt;-\nmusee_frequentation %&gt;%\n  filter(ANNEE&gt;2007) %&gt;%\n  group_by(ANNEE) %&gt;%\n  summarize(tot = sum(NB_TOTAL_ENTREES))\ndataplot\n\n# A tibble: 17 × 2\n   ANNEE    tot\n   &lt;dbl&gt;  &lt;dbl&gt;\n 1  2008 110068\n 2  2009 140005\n 3  2010 138800\n 4  2011 135151\n 5  2012 132157\n 6  2013 137711\n 7  2014 167305\n 8  2015 150944\n 9  2016 131244\n10  2017 134775\n11  2018 124964\n12  2019 142284\n13  2020  47237\n14  2021  78463\n15  2022 160544\n16  2023 201000\n17  2024 197190\n\n# data to draw dot symbolizing the max value at the end of the line\ndataplot_max &lt;-\n  dataplot %&gt;%\n  filter(ANNEE == max(ANNEE))\ndataplot_max\n\n# A tibble: 1 × 2\n  ANNEE    tot\n  &lt;dbl&gt;  &lt;dbl&gt;\n1  2024 197190\n\n#highlight color for plot\nhighlight &lt;- \"#0E2C48\"\nhighlighttext &lt;- \"#4B9E8C\"\nhighlightmain &lt;- \"#824B79\""
+  },
+  {
+    "objectID": "posts/2025-01-25/index.html#plot",
+    "href": "posts/2025-01-25/index.html#plot",
+    "title": "Fréquentation des musées d’Antibes",
+    "section": "Plot",
+    "text": "Plot\n\n# Static Plot for testing\nplot_musee_frequentation &lt;-\n  dataplot %&gt;% \n  ggplot(aes(x = ANNEE, y = tot/1000, group = 1)) + #divided to obtain thousands\n  geom_line(size = 1.5, color = \"#0E2C48\") +\n  geom_point(data = dataplot_max, size = 4, color = highlight) +\n  scale_x_continuous(breaks = c(2014,2020,2023, 2024), \n                     expand = c(0.1, 0.1),\n                     ) \nplot_musee_frequentation\n\n\n\n\n\n\n\n# Animated Plot\n# Create a new col to control the speed of the animation\ndataplot_slowdown &lt;- \n  dataplot %&gt;%\n  mutate(\n    show_time = case_when(      # Adjust show_time for specific years\n      ANNEE %in% c(2020) ~ 10,  # Show these years longer\n      TRUE ~ 1),  # Default speed for others\n    reveal_time = cumsum(show_time)  # Cumulative time for each point\n  )\n\n# Get thousands instead of individual visitors\ndataplot_slowdown$tot &lt;- round(dataplot_slowdown$tot/1000, 0)\n\n\n# Final Plot\nplot_musee_anim &lt;-\n  dataplot_slowdown %&gt;% \n  ggplot(aes(x = ANNEE, y = tot, group = 1)) + \n  geom_line(size = 2, color = highlightmain) +\n  geom_point(size = 4, color = highlightmain) + \n  geom_text(aes(label = paste(tot)), \n                vjust = 0, hjust = -0.3, color =  \"#3D2358\",\n                fontface = \"bold\",\n                family = setfont,\n                size = 6, show.legend = FALSE) +\n  geom_text(aes(\n            x = 2016,\n            y = max(dataplot_slowdown$tot) - 26,\n            label = paste(ANNEE)), \n            vjust = -0.05, \n            hjust = 0.15, \n            color = \"#946285\",\n          #  fontface = \"bold\",\n            size = 25, show.legend = FALSE) +\n  labs(y = \"Total des visiteurs\",\n       x = \"Années\",\n       title = \"Musées d'Antibes: visiteurs en hausse post-covid\",\n       subtitle = \"En milliers de visiteurs dans les musées de France\",\n       caption = social_caption2) +\n  scale_x_continuous(expand = c(0, 1.3),\n                     breaks = c(2008, 2010, 2012, 2014, 2016, 2018, 2020, 2022, 2024)) +\n  scale_y_continuous(expand = c(0.1, 0.1),\n                    labels = scales::label_number(suffix = \" K\")) +\n  tt"
+  },
+  {
+    "objectID": "posts/2025-01-25/index.html#render",
+    "href": "posts/2025-01-25/index.html#render",
+    "title": "Fréquentation des musées d’Antibes",
+    "section": "Render",
+    "text": "Render\n\n# render\nanimp &lt;-\n  plot_musee_anim +\n  transition_reveal(reveal_time) +\n  ease_aes()\n\n# render with timing \n a &lt;-  \n   animate(animp,\n           start_pause= 5,\n           end_pause = 100,\n           fps = 25,\n           duration = 10,\n           width = 1000,\n           height = 1200,\n           res = 150        # Set resolution (DPI)\n           )\n\nanim_save(\"posts/2025-01-25/plots/musees.gif\", a)"
+  },
+  {
+    "objectID": "posts/2025-01-23/index.html",
+    "href": "posts/2025-01-23/index.html",
+    "title": "Température de l’eau au cap d’Antibes",
+    "section": "",
+    "text": "Distribution des revelés de température de l’eau au cap d’Antibes (Celsius), par mois et par année."
+  },
+  {
+    "objectID": "posts/2025-01-23/index.html#import",
+    "href": "posts/2025-01-23/index.html#import",
+    "title": "Température de l’eau au cap d’Antibes",
+    "section": "Import",
+    "text": "Import\n\nlibrary(tidyverse)\nlibrary(ggridges)\nlibrary(viridis)\nlibrary(slider)\nlibrary(patchwork)\nlibrary(paletteer)\n\ndate_caption &lt;- \"31 décembre 2024\"\nsource(\"tools/themes.R\") # themes\n\nsource_est &lt;- read_csv(\"posts/2025-01-23/data/antibes-eau-temperature-est-cap.csv\")\nsource_ouest &lt;- read_csv(\"posts/2025-01-23/data/antibes-eau-temperature-ouest-cap.csv\")\n\ndf_est &lt;-source_est\ndf_ouest &lt;- source_ouest"
+  },
+  {
+    "objectID": "posts/2025-01-23/index.html#inspect",
+    "href": "posts/2025-01-23/index.html#inspect",
+    "title": "Température de l’eau au cap d’Antibes",
+    "section": "Inspect",
+    "text": "Inspect\n\nhead(df_est)\nnames(df_est)\nglimpse(df_est)\nsummary(df_ouest)"
+  },
+  {
+    "objectID": "posts/2025-01-23/index.html#clean",
+    "href": "posts/2025-01-23/index.html#clean",
+    "title": "Température de l’eau au cap d’Antibes",
+    "section": "Clean",
+    "text": "Clean\n\n# standardize and bind datasets\nfn_clean &lt;- function(df, name) {\n  # standardize cols\n  df &lt;-\n    df %&gt;% \n    select(-1, -2) %&gt;%                  # remove useless cols\n    rename_with(tolower) %&gt;%                      # lower case variable names\n    rename_with(~ str_squish(.)) %&gt;%             \n    rename_with(~ str_replace_all(.,\"annee \", \"\"))\n  \n  # adding useful cols\n  df &lt;-\n    df %&gt;%\n    mutate(region = name)\n  \n  # pivot longer\n  df&lt;-\n    df %&gt;%\n    pivot_longer(cols = 2:6, names_to = \"annee\", values_to = \"temperature\")\n  \n  return(df)\n}\n\ndf_ouest_clean &lt;- fn_clean(df_ouest, \"ouest\")\ndf_est_clean &lt;- fn_clean(df_est, \"est\")\n\n# bind\ndf_bind &lt;- bind_rows(df_est_clean, df_ouest_clean)\n\n# Manage dates\ndf_bind_clean &lt;-\n  df_bind %&gt;% \n    separate(jour, c(\"day\", \"month\"), \"-\") %&gt;%\n    mutate(month = str_replace_all(month, \"\\\\.\", \"\"),\n           month = str_to_title(month)) # Need to escape the dot (.) here\n  \n# check  \nunique(df_bind_clean$month) # month col still needs cleaning \n\ndf_bind_clean &lt;-\n  df_bind_clean %&gt;%\n    mutate(month = recode(month,\n                          \"Janv\" = \"Jan\",\n                          \"Fevr\" = \"Feb\",\n                          \"Febr\" = \"Feb\",\n                          \"Févr\" = \"Feb\",\n                          \"Mars\" = \"Mar\", \n                          \"Avr\" = \"Apr\",\n                          \"Mai\" = \"May\", \n                          \"Juin\" = \"Jun\",\n                          \"Juil\" = \"Jul\",\n                          \"Août\" = \"Aug\",\n                          \"Sept\" = \"Sep\",\n                          \"Oct\" = \"Oct\",\n                          \"Déc\" = \"Dec\"\n            ))            \n \n# add date col \ndf_bind_clean &lt;-\n  df_bind_clean %&gt;% \n    mutate(date = dmy(paste(day, month, annee, sep = \"-\"))) %&gt;%\n    select(region, date, temperature, year = annee, month, day) %&gt;% # reorder\n    drop_na() %&gt;%                                                   # drop NA\n    arrange(date)"
+  },
+  {
+    "objectID": "posts/2025-01-23/index.html#plot",
+    "href": "posts/2025-01-23/index.html#plot",
+    "title": "Température de l’eau au cap d’Antibes",
+    "section": "Plot",
+    "text": "Plot\n\n# Line graph \nplot_region_year &lt;-\ndf_bind_clean %&gt;%\n  drop_na() %&gt;%\n  mutate(date = update(date, year = 2024)) %&gt;% # plot on synchronous x-axis, /!\\ chose a leap year\n  ggplot(aes(x = date, y = temperature, group = year)) + \n  geom_line(aes(color = region)) +\n  scale_x_date(date_breaks = \"4 month\", date_labels = \"%b\") +\n  facet_wrap(~region+year, nrow = 2) \n plot_region_year\n\n\n\n\n\n\n\n     df_bind_clean_plot &lt;-\n     df_bind_clean %&gt;%\n       filter(year &gt; 2020) %&gt;%\n       mutate(region = recode(region, \"est\" = \"Est du Cap\",\n                                      \"ouest\" = \"Ouest du Cap\")) %&gt;%\n       mutate(month = factor(month, \n                             levels = c(\"Jan\", \"Feb\", \"Mar\", \"Apr\", \"May\", \"Jun\", \"Jul\", \"Aug\", \"Sep\", \"Oct\", \"Nov\", \"Dec\")))\n     \n     \n    # Ridges temperatures per year\n    plot_ridges_year &lt;-\n      df_bind_clean_plot %&gt;%\n      group_by(year) %&gt;%\n      ggplot(aes(x = temperature, y = year, fill = after_stat(x))) +\n      geom_density_ridges_gradient(color = darkblue) +  \n      scale_fill_gradientn(colors = custom_palette_water_temp) +\n      coord_cartesian(xlim=c(5,34)) +\n      scale_x_continuous(labels = scales::label_dollar(prefix = \"\", suffix = \"°c\"))  \n    plot_ridges_year\n\n\n\n\n\n\n\n    # Ridges for temperature by month\n    plot_ridges_month &lt;-\n      df_bind_clean_plot %&gt;%\n      group_by(month) %&gt;%\n      ggplot(aes(x = temperature, y = fct_rev(month), fill = after_stat(x))) +\n      geom_density_ridges_gradient(color = darkblue) +  \n      scale_fill_gradientn(colors = custom_palette_water_temp) +\n      coord_cartesian(xlim=c(9,31)) +\n      scale_x_continuous(labels = scales::label_dollar(prefix = \"\", suffix = \"°c\"))\n    plot_ridges_month"
+  },
+  {
+    "objectID": "posts/2025-01-23/index.html#render",
+    "href": "posts/2025-01-23/index.html#render",
+    "title": "Température de l’eau au cap d’Antibes",
+    "section": "Render",
+    "text": "Render\n\nplot_ridges_year_final &lt;-  \nplot_ridges_year + \n    facet_wrap(~region, ncol =1, strip.position = \"top\", scales = \"free\") +\n   labs(\n     title = \"Baignade : l'année 2024 légèrement plus chaude que les précédentes\",\n     subtitle = \"Distribution des revelés de température de l'eau au cap d'Antibes (Celsius), par années\",\n     x = \"Température (Celsius)\",\n     caption = social_caption2) + tt8\n  \nplot_ridges_month_final &lt;-    \nplot_ridges_month + \n  facet_wrap(~region, ncol =1, strip.position = \"top\", scales = \"free\") +\n  labs(\n    title = \"Antibes Juan-Les-Pins baignable une grande partie de l'année\",\n    subtitle = \"Distribution des revelés de température de l'eau au cap d'Antibes (Celsius), par mois\",\n    x = \"Température (Celsius)\",\n    caption = social_caption2) + tt8\n\n\nplot_ridges_month_final  \n\n\n\n\n\n\n\n\n\nplot_ridges_year_final\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n\n\nSmoothing with a moving average method using slide_dbl() will not plot correctly because there are irregular missing dates in the data. \nFixing this would require filling missing values with tidyr::complete() and then filling upwards the NA values or computing them, or using library(zoo) for something like rollmean(df_bind_clean$temperature, 3, fill = \"extend\"). \nWe are chosing to work with actual values only for this analysis."
+  },
+  {
+    "objectID": "posts/2025-01-21/index.html#import",
+    "href": "posts/2025-01-21/index.html#import",
+    "title": "Activités sportives à Antibes",
+    "section": "Import",
+    "text": "Import\n\nlibrary(tidyverse)\nlibrary(readxl)\nlibrary(skimr)\nlibrary(plotly)\nlibrary(gghighlight)\nlibrary(patchwork)\n\ndate_caption &lt;- \"9 janvier 2024\"\nsource(\"tools/themes.R\") # themes\n\nsource &lt;- read_csv(\"posts/2025-01-21/data/antibes-animations-sportives.csv\")\ndf &lt;- source"
+  },
+  {
+    "objectID": "posts/2025-01-21/index.html#inspect",
+    "href": "posts/2025-01-21/index.html#inspect",
+    "title": "Activités sportives à Antibes",
+    "section": "Inspect",
+    "text": "Inspect\n\nhead(df)\nunique(df$ORGANISATEUR)\ncolnames(df)\nglimpse(df)\nmax(df$`DATE FIN`)"
+  },
+  {
+    "objectID": "posts/2025-01-21/index.html#clean",
+    "href": "posts/2025-01-21/index.html#clean",
+    "title": "Activités sportives à Antibes",
+    "section": "Clean",
+    "text": "Clean\n\n # standardize cols names and variables in chr type\ndf &lt;-\n  df %&gt;% \n    rename_with(tolower) %&gt;%\n    rename_with(~ str_squish(.)) %&gt;%\n    rename_with(~ str_replace_all(., \" \", \"_\")) %&gt;%\n    mutate(across(where(is.character), ~ str_squish(str_to_lower(.)))) %&gt;%\n    mutate(across(c(date_debut, date_fin), as.Date))\n\n# drop NA\ndf &lt;-\n  df %&gt;% \n  drop_na(date_debut, date_fin, organisateur) \n# check no NAs are remaining  \nskim(df) \n\n# remove unwanted cols\ndf &lt;-\n  df %&gt;%      \n    select(animations, date_debut, date_fin, organisateur, lieu_1)\n\n# adding useful cols\ndf &lt;-\n df %&gt;% mutate(yd = year(date_debut),\n         md = month(date_debut),\n         dd = day(date_debut),\n         yf = year(date_fin),\n         mf = month(date_fin),\n         df = day(date_fin),\n         yearmonth = paste0(yd,\"-\", md)\n         ) %&gt;% arrange(yd, md, dd) %&gt;%\n  mutate(duration = (date_fin - date_debut)\n)"
+  },
+  {
+    "objectID": "posts/2025-01-21/index.html#further-cleaning-using-openrefine",
+    "href": "posts/2025-01-21/index.html#further-cleaning-using-openrefine",
+    "title": "Activités sportives à Antibes",
+    "section": "Further cleaning using OpenRefine",
+    "text": "Further cleaning using OpenRefine\n\n# save file for OpenRefine\nwrite_csv(df, \"posts/2025-01-21/data/animations.csv\")\n\n# load refined data\ndf_refined &lt;- read_csv(\"posts/2025-01-21/data/animations_openrefined.csv\")\n\n# additional cleaning step \ndf_refined &lt;- \n  df_refined %&gt;%\n  mutate(organisateur = case_when(\n    organisateur %in% c(\"asf boules\", \"as fontonne boule\") ~ \"as fontonne boules\",\n    TRUE ~ organisateur\n  ))\n\n# filter year\ndf_refined &lt;- \n  df_refined %&gt;% filter(yd &gt; 2019) \n\n# title case variables \ndf_refined &lt;-\n  df_refined %&gt;%\n  mutate(across(c(lieu_1, organisateur), str_to_title))\n\n\ndf_refined\n\n# A tibble: 603 × 13\n   animations  date_debut date_fin   organisateur lieu_1    yd    md    dd    yf\n   &lt;chr&gt;       &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;        &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n 1 bain du jo… 2020-01-01 2020-01-01 Day One      Plage…  2020     1     1  2020\n 2 rencontre … 2020-01-04 2020-01-04 Badminton C… Gymna…  2020     1     4  2020\n 3 match pare… 2020-01-12 2020-01-12 Oajlp Handb… Salle…  2020     1    12  2020\n 4 ag wild mo… 2020-01-12 2020-01-12 Wild Move    Base …  2020     1    12  2020\n 5 ski voile … 2020-01-16 2020-01-19 Société Des… Port …  2020     1    16  2020\n 6 19ème souv… 2020-01-19 2020-01-19 Antibes Vél… Parki…  2020     1    19  2020\n 7 rencontre … 2020-01-21 2020-01-24 Asf Hockey … Stade…  2020     1    21  2020\n 8 challenge … 2020-01-22 2020-01-22 Handisport … Salle…  2020     1    22  2020\n 9 sélection … 2020-02-01 2020-02-01 Oajlp Gymna… Salle…  2020     2     1  2020\n10 top 12 gym  2020-02-08 2020-02-08 Oajlp Gymna… Foch    2020     2     8  2020\n# ℹ 593 more rows\n# ℹ 4 more variables: mf &lt;dbl&gt;, df &lt;dbl&gt;, yearmonth &lt;chr&gt;, duration &lt;dbl&gt;"
+  },
+  {
+    "objectID": "posts/2025-01-21/index.html#analysis",
+    "href": "posts/2025-01-21/index.html#analysis",
+    "title": "Activités sportives à Antibes",
+    "section": "Analysis",
+    "text": "Analysis\n\n# faceting : top organizers, locations, activities\norgs &lt;-\n  df_refined %&gt;% \n  count(organisateur) %&gt;% arrange(-n)\norgs\n\nlieux &lt;-\n  df_refined %&gt;% \n  count(lieu_1) %&gt;% arrange(-n)\nlieux\n\nactivities &lt;-\n  df_refined %&gt;% \n  count(animations) %&gt;% arrange(-n)\nactivities\n\n# Filter top 10 organisateurs\ntop_orgs &lt;- orgs %&gt;% \n  slice_max(order_by = n, n = 10)\n\n# Filter top 10 lieux\ntop_lieux &lt;- lieux %&gt;% \n  slice_max(order_by = n, n = 10)\n\n# Count\ncount.animations.year &lt;-\ndf_refined %&gt;%\ncount(yd)  \n\ncount.animations.yearmonth &lt;-\ndf_refined %&gt;%\n  count(yearmonth)\n\n# Averages\nmean(df_refined$duration) # mean duration\nskim(df_refined$duration) # other stats"
+  },
+  {
+    "objectID": "posts/2025-01-21/index.html#plot",
+    "href": "posts/2025-01-21/index.html#plot",
+    "title": "Activités sportives à Antibes",
+    "section": "Plot",
+    "text": "Plot\n\n# Color \n  c_highlight &lt;-\"#1D6FA1\"\n  \n## Col chart per month  \ndf_plot.year.facet &lt;-\n  df_refined %&gt;%\n  group_by(yd, md, organisateur) %&gt;%\n  count() %&gt;%\n  mutate(yd = factor(yd, levels = c(\"2023\", \"2022\", \"2021\", \"2020\")))  \n\nplot.year.facet &lt;-\n  df_plot.year.facet %&gt;%\n  ggplot(aes(x = md, y = n)) +\n  geom_col(fill = c_highlight, alpha = 0.6) +\n  geom_col(data = df_plot.year.facet %&gt;% filter(yd == 2023), fill = c_highlight, alpha = 1) +\n  geom_text( # axis labels\n    data = data.frame(x = 12.9, y = seq(0, 40, by = 10)),\n    aes(x, y, label = y),\n    color = \"black\",\n    family = setfont,\n    hjust = 1, \n    vjust = -0.5, \n    size = 3.5\n  ) +\n  geom_text(data = count.animations.year %&gt;% filter(yd == 2023),\n            aes(x = 2, y = 34, label = paste0(n, \" activités en 2023\")),\n            family = setfont,\n            hjust = 0.3,\n            fontface = \"bold\",\n            color = c_highlight,\n            size = 6) +\n  geom_text(data = count.animations.year %&gt;% filter(yd &lt; 2023),\n            aes(x = 2, y = 34, label = paste0(n, \" activités\")),\n            family = setfont,\n            color = c_highlight,\n            hjust = 0.5,\n            alpha = 0.6,\n            size = 6) +\n  scale_x_continuous( limits = c(0, 13),\n                      expand = c(0, 0), \n                      breaks = seq(1, 12, by = 1),\n                      labels = c(\"J\", \"F\", \"M\", \"A\", \"M\", \"J\", \"J\", \"A\", \"S\", \"O\", \"N\", \"D\"),\n                     ) +\n  scale_y_continuous(expand = c(0, 0)) + #start axis origin at 0\n  facet_wrap(~yd, ncol = 1, strip.position = \"left\", scales = 'free_x') + \n  theme(legend.position = \"none\") \n\np &lt;- \nplot.year.facet +\n  labs(title = \"Moins d'activités sportives à Antibes en 2023 par rapport à 2022\",\n       subtitle = \"Nombre d'activités sportives organisées à Antibes par mois et par années.\",\n       caption = social_caption2) + tt2\n                        \n  # Bar charts for top 10s  \n\n    # Plot for top 10 organisateurs\n    plot_orgs &lt;- ggplot(top_orgs, aes(x = reorder(organisateur, n), y = n)) +\n      geom_bar(stat = \"identity\", fill =  \"#457ECD\") +\n      geom_text(aes(label = n), hjust = 1.8, size = 8, family = setfont, fontface = \"bold\", color = \"white\") +\n      coord_flip() +\n      labs(\n        title = \"Top 10 des organisateurs d'activités sportives à Antibes\",\n        subtitle = \"Classement des organisations sportives d'Antibes Juan-Les-Pins, par nombre d'activités organisées. Période 2020-2023\",\n        caption = social_caption2\n      ) + tt4\n    \n    # Plot for top 10 lieux\n    plot_lieux &lt;- ggplot(top_lieux, aes(x = reorder(lieu_1, n), y = n)) +\n      geom_bar(stat = \"identity\", fill = \"#FC972F\") +\n      geom_text(aes(label = n), hjust = 1.8, size = 8, family = setfont, fontface = \"bold\", color = darkblue) +\n      coord_flip() +\n      labs(\n        title = \"Top 10 des lieux d'activités sportives à Antibes\",\n        subtitle = \"Classement des lieux d'Antibes Juan-Les-Pins, par nombre d'activités sportives acceuillies. &lt;br&gt;Période 2020-2023\",\n        caption = social_caption2\n        \n      ) + tt4"
+  },
+  {
+    "objectID": "posts/2025-01-17/index.html",
+    "href": "posts/2025-01-17/index.html",
+    "title": "Qualité des metadonnées",
+    "section": "",
+    "text": "Un score de qualité des métadonnées a été mis en place sur data.gouv.fr pour aider les utilisateurs à identifier les jeux de données de qualité et encourager les producteurs à améliorer leurs contributions. Les 7 critères de cet indicateur sont définis sur data.gouv.fr\n\n\n\n\n\n\n\nIndicateur tel qu’il est présenté sur data.gouv.fr\n\n\nCe post propose une visualisation du score pour trois villes de la Côte d’Azur qui ont publié des données:\n\nAntibes\nCannes\nNice"
+  },
+  {
+    "objectID": "posts/2025-01-17/index.html#import",
+    "href": "posts/2025-01-17/index.html#import",
+    "title": "Qualité des metadonnées",
+    "section": "Import",
+    "text": "Import\n\nlibrary(tidyverse)\nlibrary(paletteer)\nlibrary(patchwork)\nlibrary(gt)\n\ndate_caption &lt;- \"20 janvier 2025\"\nsource(\"tools/themes.R\") # themes\n\n\ndf_antibes &lt;- read_csv(\"posts/2025-01-17/data/results_antibes.csv\")\ndf_cannes &lt;- read_csv(\"posts/2025-01-17/data/results_cannes.csv\")\ndf_nice &lt;- read_csv(\"posts/2025-01-17/data/results_nice.csv\")"
+  },
+  {
+    "objectID": "posts/2025-01-17/index.html#create-dataframe",
+    "href": "posts/2025-01-17/index.html#create-dataframe",
+    "title": "Qualité des metadonnées",
+    "section": "Create dataframe",
+    "text": "Create dataframe\n\n# quick approach for col chart\ndf &lt;-\n    tibble(\n      antibes = mean(df_antibes$values),\n      cannes = mean(df_cannes$values),\n      nice = mean(df_nice$values)\n    )\n\ndf &lt;-\n    pivot_longer(df, \n                 cols = everything(), \n                 names_to = \"ville\", \n                 values_to = \"mean_quality\")\n\n\n# other approach for violin plot\ndf_point_antibes &lt;- df_antibes %&gt;% mutate(ville = \"Antibes\")\ndf_point_cannes &lt;- df_cannes %&gt;% mutate(ville = \"Cannes\")\ndf_point_nice &lt;- df_nice %&gt;% mutate(ville = \"Nice\")\n\ndf_point &lt;- bind_rows(df_point_antibes, \n                      df_point_cannes, \n                      df_point_nice)\n\ndf_matrix &lt;-\ndf_point %&gt;% \n  group_by(ville) %&gt;%\n  summarise(quantité = n(), qualité= mean(values)) %&gt;%\n  mutate(qualité = scales::percent(qualité))\n\ngt(df_matrix)\n\n\n\n\n\n\n\nville\nquantité\nqualité\n\n\n\n\nAntibes\n162\n85%\n\n\nCannes\n138\n52%\n\n\nNice\n278\n28%"
+  },
+  {
+    "objectID": "posts/2025-01-17/index.html#clean",
+    "href": "posts/2025-01-17/index.html#clean",
+    "title": "Qualité des metadonnées",
+    "section": "Clean",
+    "text": "Clean\n\n# standardize cols names and variables\n  df &lt;-\n  df %&gt;%\n    mutate(across(c(ville, mean_quality), str_to_title)) %&gt;%\n    mutate(mean_quality = as.numeric(mean_quality)) %&gt;%\n    mutate(ville = as_factor(ville))\n  \n# adding useful cols\n  df &lt;-\n    df %&gt;% \n    mutate(taux = scales::percent(mean_quality))"
+  },
+  {
+    "objectID": "posts/2025-01-17/index.html#plot",
+    "href": "posts/2025-01-17/index.html#plot",
+    "title": "Qualité des metadonnées",
+    "section": "Plot",
+    "text": "Plot\n\n# col chart\nplot_col &lt;-\n df %&gt;%\n    ggplot(aes(x = ville, y = mean_quality))+\n      geom_col(aes(y = 1), alpha = 0.4) +\n      geom_col(aes(fill = mean_quality)) +\n      geom_text(aes(label = taux),\n                    vjust = 2,\n                     hjust = 0.4,\n                    size = 8,\n                    color = \"black\",\n                    fontface = \"bold\",\n                    family = setfont) + tt6\n\n# violin plot\nplot_violin &lt;-\ndf_point %&gt;%\n  ggplot(aes(x = ville, y = values, color = values)) +\n  geom_violin(color = NA, fill = \"gray80\")+ \n  geom_jitter(alpha = 0.8, size = 2.5) +\n  scale_y_continuous(labels = scales::label_percent(), breaks = scales::breaks_extended(n = 6), limits = c(0,1)) +\n  tt9\n\n# labels and colors   \nplot_col &lt;-\nplot_col +\n  scale_y_discrete(expand = c(0, 0)) + # force origin at 0\n  scale_fill_paletteer_c(\"ggthemes::Red-Green-Gold Diverging\") +\n  labs(\n    title = \"Antibes en tête dans la qualité des données\",\n    subtitle = \"Qualité des metadonnées publiées sur opendata.gouv.fr. moyenne en (%)\",\n    caption = social_caption2) \n\n\nplot_violin &lt;-\nplot_violin +\n    scale_color_paletteer_c(\"ggthemes::Red-Green-Gold Diverging\") +\n    labs(\n      title = \"Antibes en tête dans la qualité des données\",\n      subtitle = \"Qualité des metadonnées publiées sur opendata.gouv.fr (%) &lt;br&gt;Chaque point représente un jeu de données\",\n      caption = social_caption2)"
+  },
+  {
+    "objectID": "posts/2025-01-17/index.html#render",
+    "href": "posts/2025-01-17/index.html#render",
+    "title": "Qualité des metadonnées",
+    "section": "Render",
+    "text": "Render\n\nplot_col \n\n\n\n\n\n\n\n\n\nplot_violin"
+  },
+  {
+    "objectID": "posts/2025-01-17/index.html#source",
+    "href": "posts/2025-01-17/index.html#source",
+    "title": "Qualité des metadonnées",
+    "section": "Source",
+    "text": "Source\ndata.gouv.fr 20 janvier 2025"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "A propos",
+    "section": "",
+    "text": "Pourquoi ce site ?\nCe blog vise à promouvoir l’Open Data dans la ville d’Antibes Juan-Les-Pins dans un but informatif et éducatif. La plupart des données sont issues de data.gouv.fr et publiées par la ville.\n\n\nEn savoir plus\nLe code source est disponible sur le dépôt GitHub ici.\n\n\n\n Retour au sommet"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Open Data à Antibes",
+    "section": "",
+    "text": "Fréquentation des musées d’Antibes\n\n\n\n\n\nHausse record des visiteurs post-COVID pour le Musée Picasso et le Musée de l’Archéologie\n\n\n\n\n\n25 janv. 2025\n\n\n5 min.\n\n\n\n\n\n\n\n\n\n\n\n\nJardins partagés à Antibes\n\n\n\n\n\nSurface des jardins partagés en m2\n\n\n\n\n\n24 janv. 2025\n\n\n2 min.\n\n\n\n\n\n\n\n\n\n\n\n\nTempérature de l’eau au cap d’Antibes\n\n\n\n\n\nDistribution des revelés de température de l’eau au cap d’Antibes\n\n\n\n\n\n23 janv. 2025\n\n\n8 min.\n\n\n\n\n\n\n\n\n\n\n\n\nNaissances et prénoms à Antibes\n\n\n\n\n\nPrénoms des nouveaux-nés déclarés à l’état-civil à Antibes.\n\n\n\n\n\n22 janv. 2025\n\n\n6 min.\n\n\n\n\n\n\n\n\n\n\n\n\nActivités sportives à Antibes\n\n\n\n\n\nEvolution, lieux et organisateurs des activités sportives à Antibes Juan-Les-Pins\n\n\n\n\n\n21 janv. 2025\n\n\n7 min.\n\n\n\n\n\n\n\n\n\n\n\n\nMandats des maires d’Antibes du XIXème siècle à nos jours\n\n\n\n\n\nDurée des mandats des maires d’Antibes du XIXème siècle à nos jours\n\n\n\n\n\n20 janv. 2025\n\n\n7 min.\n\n\n\n\n\n\n\n\n\n\n\n\nQualité des metadonnées\n\n\n\n\n\nScore de qualité des données publiées par trois villes de la Côte d’Azur\n\n\n\n\n\n17 janv. 2025\n\n\n4 min.\n\n\n\n\n\n\nAucun article correspondant\n\n Retour au sommet"
+  },
+  {
+    "objectID": "posts/2025-01-20/index.html",
+    "href": "posts/2025-01-20/index.html",
+    "title": "Mandats des maires d’Antibes du XIXème siècle à nos jours",
+    "section": "",
+    "text": "Visualisation des données publiées sur data.gouv.fr par la ville d’Antibes Juan-Les-Pins “Maires d’Antibes depuis 1681 jusqu’aux élections de mars 2020 incluses.”"
+  },
+  {
+    "objectID": "posts/2025-01-20/index.html#import",
+    "href": "posts/2025-01-20/index.html#import",
+    "title": "Mandats des maires d’Antibes du XIXème siècle à nos jours",
+    "section": "Import",
+    "text": "Import\n\nlibrary(tidyverse)\nlibrary(janitor)\nlibrary(skimr)\n\ndate_caption &lt;- \"9 juin 2020\"\nsource(\"tools/themes.R\") # themes\n# Idea : https://jrnold.github.io/priestley/articles/priestley.html\n\nsource &lt;- read_csv2(\"posts/2025-01-20/data/antibes-maires-depuis1681.csv\")\ndf &lt;- source"
+  },
+  {
+    "objectID": "posts/2025-01-20/index.html#inspect",
+    "href": "posts/2025-01-20/index.html#inspect",
+    "title": "Mandats des maires d’Antibes du XIXème siècle à nos jours",
+    "section": "Inspect",
+    "text": "Inspect\n\nhead(df)\ntail(df)\nglimpse(df)\nskim(df)\nsummary(df)\nstr(df)\nnames(df)\ncolnames(df)\nunique(df$MAIRE_NOM)\njanitor:::tabyl(df$MAIRE_NOM)  %&gt;% arrange(-percent)"
+  },
+  {
+    "objectID": "posts/2025-01-20/index.html#clean",
+    "href": "posts/2025-01-20/index.html#clean",
+    "title": "Mandats des maires d’Antibes du XIXème siècle à nos jours",
+    "section": "Clean",
+    "text": "Clean\n\ndf &lt;- \n  df %&gt;%\n  select(3:9) %&gt;%\n  select(-6) %&gt;%\n  mutate_if(is.character, as.factor) %&gt;%\n  mutate(duree = df$FIN_MANDAT-df$DEBUT_MANDAT_ANNEE) %&gt;%\n  ungroup() %&gt;%\n  arrange(MAIRE_NOM) %&gt;%\n  arrange(DEBUT_MANDAT_ANNEE) %&gt;%\n  group_by(MAIRE_NOM, MAIRE_PRENOM) %&gt;%\n  mutate(id = cur_group_id()) %&gt;% # group ids\n  mutate(dureetot = cumsum(duree)) %&gt;%\n  mutate(dureetotmax = max(dureetot)) %&gt;%\n  unite(idnom, c(MAIRE_PRENOM,MAIRE_NOM,id), remove = FALSE) \n\ndf &lt;-\n  df %&gt;% \n  mutate(CONTEXTE_HISTORIQUE = str_to_title(CONTEXTE_HISTORIQUE))\n\n#make col with unique names\ndf &lt;- df %&gt;%\n  mutate(labelname = paste0(`MAIRE_PRENOM`, \" \", `MAIRE_NOM`)) %&gt;%\n  group_by(labelname) %&gt;%\n  mutate(labelname = ifelse(row_number() == 1, labelname, NA_character_)) %&gt;%\n  ungroup()\n\n  #check labelname are unique\nprint(df[c(\"idnom\", \"labelname\")])\n\n\nglimpse(df)\n\nRows: 110\nColumns: 12\n$ idnom               &lt;chr&gt; \"Honoré_BERNARDY_8\", \"Antoine_REGNARD_49\", \"Honoré…\n$ MAIRE_PRENOM        &lt;fct&gt; Honoré, Antoine, Honoré, non communiqué, Honoré, J…\n$ MAIRE_NOM           &lt;fct&gt; BERNARDY, REGNARD, LEON, GUIRAUD, CARENCE, ARAZY, …\n$ DEBUT_MANDAT_ANNEE  &lt;dbl&gt; 1681, 1701, 1702, 1704, 1705, 1706, 1711, 1712, 17…\n$ FIN_MANDAT          &lt;dbl&gt; 1681, 1701, 1702, 1704, 1705, 1706, 1711, 1712, 17…\n$ PROFESSION_MAIRE    &lt;fct&gt; \"Avocat à la cour d'Aix\", \"Maître-apothicaire\", \"B…\n$ CONTEXTE_HISTORIQUE &lt;chr&gt; \"Grand Siecle\", \"Grand Siecle\", \"Grand Siecle\", \"G…\n$ duree               &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…\n$ id                  &lt;int&gt; 8, 49, 36, 30, 12, 1, 36, 18, 16, 51, 17, 62, 6, 3…\n$ dureetot            &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…\n$ dureetotmax         &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…\n$ labelname           &lt;chr&gt; \"Honoré BERNARDY\", \"Antoine REGNARD\", \"Honoré LEON…"
+  },
+  {
+    "objectID": "posts/2025-01-20/index.html#analyze",
+    "href": "posts/2025-01-20/index.html#analyze",
+    "title": "Mandats des maires d’Antibes du XIXème siècle à nos jours",
+    "section": "Analyze",
+    "text": "Analyze\n\n#create CONTEXTE HISTORIQUE BOXES\ndf &lt;-\ndf %&gt;% \n  group_by(CONTEXTE_HISTORIQUE) %&gt;%\n  mutate(CONTEXTEmin = min(DEBUT_MANDAT_ANNEE),\n         CONTEXTEmax = max(FIN_MANDAT)) %&gt;%\n  ungroup()\n\n#create CONTEXTE HISTORIQUE bins\ndf&lt;-\n  df %&gt;%\n  mutate(phase = cut(DEBUT_MANDAT_ANNEE,\n                     breaks = c(1680,1800,1900,2020,2026),\n                     labels = c(\"XVII-XVIIIeme\", \"XIXeme\", \"XXeme\", \"XXIeme\"))) %&gt;%\n  filter(DEBUT_MANDAT_ANNEE &gt; 1808)"
+  },
+  {
+    "objectID": "posts/2025-01-20/index.html#plot",
+    "href": "posts/2025-01-20/index.html#plot",
+    "title": "Mandats des maires d’Antibes du XIXème siècle à nos jours",
+    "section": "Plot",
+    "text": "Plot\n\ntimeline &lt;- \ndf %&gt;%\n  mutate(phase = fct_rev(phase)) %&gt;%  # Reverse the order of facets\n  ggplot(aes(\n    x = DEBUT_MANDAT_ANNEE, \n    y = reorder(idnom, DEBUT_MANDAT_ANNEE), \n    )) +\n  geom_segment(aes(xend = FIN_MANDAT, \n                   yend = idnom,\n                   color = reorder(CONTEXTE_HISTORIQUE, FIN_MANDAT) \n                   ),  \n               linewidth = 6, lineend = \"round\"\n               ) +\n  geom_text(\n              aes(label = labelname),\n              size = 4.5, \n              hjust = 0.05,\n              nudge_y = 0.4, \n              family = setfont,\n              color = \"gray20\"\n  ) +\n  geom_text(data = df %&gt;%\n                    filter(df$dureetotmax &gt;= 9) %&gt;%\n                    group_by(idnom) %&gt;%\n                    summarise(dureetotmax = max(dureetotmax),\n                              DEBUT_MANDAT_ANNEE = min(DEBUT_MANDAT_ANNEE)),\n            aes(\n              x = DEBUT_MANDAT_ANNEE,\n              y = reorder(idnom, DEBUT_MANDAT_ANNEE), \n              label = paste0(dureetotmax, \" ans\")\n              ),\n            size = 4,\n            hjust = 0.1,\n            vjust = 2.1,\n            nudge_y = 0.4,\n            family = setfont,\n            color = \"white\",\n            fontface = \"bold\"\n            ) +\n  annotate(\n    \"label\",\n    x = -Inf,  # Position at the far left of the plot\n    y = Inf,   # Position at the top of the plot\n    label = \"  \n    \n  Jean LEONETTI est maire d'Antibes depuis 1995, \n  et totalisera 31 années de mandats d'ici 2026.\n  Il est aussi député des Alpes-Maritimes et\n  président de la communauté d'agglomération \n  de Sophia Antipolis depuis 2002.\n  L'élu détient le record de longévité après \n  Jean-Baptiste ROSTAN, qui a servi 34 ans \n  entre 1831 et 1865.\",\n    hjust = 0,  \n    vjust = 1, \n    family = setfont,\n    fontface = \"bold\",\n    size = 4.5, \n    color = \"gray30\",  \n    fill = \"#FAE5C6\",\n    label.size = 0   # Removes the border around the label\n  ) +\n  annotate(\n    \"curve\",\n    x = 1928,   \n    xend = 1990,     \n    y = max(as.numeric(factor(df$idnom)))-0.5,  \n    yend = max(as.numeric(factor(df$idnom))+0.1),    \n    curvature = -0.2,              \n    arrow = arrow(length = unit(0.02, \"npc\"), type = \"open\"),\n    colour = \"gray30\",            \n    size = 1.2                   \n  ) +\n  labs(title = \"Jean Leonetti : record de longévité à la mairie d'Antibes\",\n       subtitle = \"Mandats des maires d'Antibes du XIXème siècle à nos jours\",\n       caption = social_caption2,\n       color =\"Contexte historique\") +\n  scale_color_manual(values = custom_palette) +\n  scale_fill_manual(values = custom_palette) +\n  tt.maires +\n  guides(color = guide_legend(reverse = TRUE)) +\n  scale_x_continuous(\n    limits = c(min(df$DEBUT_MANDAT_ANNEE)-1, max(df$FIN_MANDAT) + 1), # Add space\n    expand = expansion(mult = 0.1)                      # Add 10% space on both sides\n  )\n\nRender\n\ntimeline"
+  },
+  {
+    "objectID": "posts/2025-01-22/index.html",
+    "href": "posts/2025-01-22/index.html",
+    "title": "Naissances et prénoms à Antibes",
+    "section": "",
+    "text": "Ce poste propose une analyse statistique des naissances à Antibes sur la période 2013-2023. Un graphe en barres décrit le volume des naissances, et les segments décrivent la croissance moyenne annuelle des prénoms (en %). Au top des prénoms en volume, on trouve Adam pour les garçons avec 72 naissances et Emma pour les filles avec 53 naissances. Au top des prénoms en croissance moyenne annuelle on trouve Youssef (+79%) pour les garçons et Luna (+106%) pour les filles."
+  },
+  {
+    "objectID": "posts/2025-01-22/index.html#import",
+    "href": "posts/2025-01-22/index.html#import",
+    "title": "Naissances et prénoms à Antibes",
+    "section": "Import",
+    "text": "Import\n\nlibrary(tidyverse)\nlibrary(readxl)\nlibrary(skimr)\nlibrary(summarytools)\nlibrary(patchwork)\nlibrary(ggwordcloud)\nlibrary(plotly)\n\ndate_caption &lt;- \"5 janvier 2024\"\nsource(\"tools/themes.R\") # themes\n\nsource &lt;- read_csv(\"posts/2025-01-22/data/antibes_prenoms_naissance_ty62ggz.csv\")\ndf &lt;- source"
+  },
+  {
+    "objectID": "posts/2025-01-22/index.html#inspect",
+    "href": "posts/2025-01-22/index.html#inspect",
+    "title": "Naissances et prénoms à Antibes",
+    "section": "Inspect",
+    "text": "Inspect\n\nhead(df)\nnames(df)\nglimpse(df)\nsummary(df)\nskim(df)\nsapply(df, unique)\ndfSummary(df)"
+  },
+  {
+    "objectID": "posts/2025-01-22/index.html#clean",
+    "href": "posts/2025-01-22/index.html#clean",
+    "title": "Naissances et prénoms à Antibes",
+    "section": "Clean",
+    "text": "Clean\n\n# standardize cols names and variables in chr type\ndf &lt;-\n  df %&gt;% \n  rename_with(tolower) %&gt;%\n  rename_with(~ str_squish(.)) %&gt;%\n  rename_with(~ str_replace_all(., \" \", \"_\")) %&gt;%\n  mutate(across(where(is.character), ~ str_squish(str_to_lower(.))))\n\n# remove unwanted cols\ndf &lt;-\n  df %&gt;% \n  select(annee, enfant_sexe, enfant_prenom, nombre_occurrences)\n\n# Title case variables \ndf &lt;-\n  df %&gt;%\n  mutate(across(c(enfant_sexe, enfant_prenom), str_to_title))\n\n# Filter \ndf &lt;-\n  df %&gt;%\n  filter(annee &gt;= 2012)"
+  },
+  {
+    "objectID": "posts/2025-01-22/index.html#analysis",
+    "href": "posts/2025-01-22/index.html#analysis",
+    "title": "Naissances et prénoms à Antibes",
+    "section": "Analysis",
+    "text": "Analysis\n\n# Evolution of total births\ndf %&gt;%\n    group_by(annee) %&gt;%\n    summarize(naissances = sum(nombre_occurrences)) %&gt;% plot(type = \"l\")\n\n\n\n\n\n\n\n# Top 10\ndf_top10 &lt;-\n  df %&gt;%\n  group_by(enfant_sexe, enfant_prenom) %&gt;%\n  summarise(n = sum(nombre_occurrences)) %&gt;%\n  arrange(-n) %&gt;%\n  slice_max(n, n = 10)\n\n# Top 10 Male and Female\n  df_top10_M &lt;- df_top10 %&gt;% filter(enfant_sexe == \"M\")\n  df_top10_F &lt;- df_top10 %&gt;% filter(enfant_sexe == \"F\")\n\n# YoY Growth\ndt_prep_yoy &lt;-\n  df %&gt;% \n    group_by(enfant_prenom) %&gt;%\n    mutate(nombre_occurrences_previous = lag(nombre_occurrences, order_by = annee),\n           yoy_growth = (nombre_occurrences / nombre_occurrences_previous - 1)*100)\n\ndf_yoy &lt;- \ndt_prep_yoy %&gt;%\n  drop_na() %&gt;%\n  group_by(enfant_sexe, enfant_prenom) %&gt;% \n  summarise(tot_nombre_occurences = sum(nombre_occurrences), # number of births\n            mean_yoy_growth = mean(yoy_growth))      # mean growth rate\n\ndf_yoy_top10 &lt;-\ndf_yoy %&gt;%\n  arrange(-tot_nombre_occurences) %&gt;%\n  slice_max(tot_nombre_occurences, n = 10) %&gt;%\n  filter(enfant_sexe != \"I\") \n\ndf_yoy_top10_M &lt;-\n  df_yoy %&gt;%\n  filter(enfant_sexe == \"M\") %&gt;%\n  arrange(-tot_nombre_occurences) %&gt;%\n  slice_max(tot_nombre_occurences, n = 10) \n\ndf_yoy_top10_F &lt;-\n  df_yoy %&gt;%\n  filter(enfant_sexe == \"F\") %&gt;%\n  arrange(-tot_nombre_occurences) %&gt;%\n  slice_max(tot_nombre_occurences, n = 10)"
+  },
+  {
+    "objectID": "posts/2025-01-22/index.html#plot",
+    "href": "posts/2025-01-22/index.html#plot",
+    "title": "Naissances et prénoms à Antibes",
+    "section": "Plot",
+    "text": "Plot\n\n# Ranking of top 10 names per volume, with adoption rate (Mean YoY Growth)\n  \ndf_yoy_top10$enfant_sexe &lt;- factor(df_yoy_top10$enfant_sexe, levels = c(\"M\", \"F\"))\n\nplot_ranking_top10 &lt;-\ndf_yoy_top10 %&gt;%\n ggplot(aes(x = reorder(enfant_prenom, tot_nombre_occurences), y = tot_nombre_occurences)) +\n      geom_bar(aes(fill = enfant_sexe), stat = \"identity\", alpha = 0.7) +\n      geom_point(aes(x =  enfant_prenom, y = mean_yoy_growth), size = 2) +     \n      geom_segment(aes(\n             x = enfant_prenom, \n             xend = enfant_prenom, \n             y = 0, \n             yend = mean_yoy_growth), \n         color = darkblue, \n         alpha = 0.8,\n         size = 0.5) +\n      geom_text(aes(\n                      x =  enfant_prenom,             \n                      y = mean_yoy_growth,\n                      label = paste0(\"+\", round(mean_yoy_growth, 0), \"%\")\n                    ),\n                size = 5,\n                hjust = -0.15,\n                alpha = 0.8,\n                family = setfont\n                ) +\n  scale_fill_manual(values = c(\"#1D6FA1\", \"#824B79\")) +\n  facet_wrap(~enfant_sexe,  scales = \"free_y\") +\n  scale_y_continuous(limits = c(0,140), breaks = c(0, 25, 50, 75, 100)) +\n  coord_flip() + tt7"
+  },
+  {
+    "objectID": "posts/2025-01-22/index.html#render",
+    "href": "posts/2025-01-22/index.html#render",
+    "title": "Naissances et prénoms à Antibes",
+    "section": "Render",
+    "text": "Render\n\nplot_ranking_top10 + \nlabs(caption = social_caption2)  + \nplot_annotation(\n  title = 'Prénoms à Antibes sur les 10 dernières années',\n  subtitle = \"Nombre de naissance (barres), et vitesse d'adoption en % (lignes) &lt;br&gt;Période 2013-2023\",\n  theme = theme(\n    plot.title = element_text(margin = margin(t = 13, b = 3), \n                              hjust = 0,\n                              family = setfont,\n                              face = \"bold\", \n                              color =\"black\",\n                              size = 18),\n    plot.subtitle = element_textbox_simple(\n      margin = margin(b = 20),\n      hjust = 0,\n      family = setfont,\n      size = 14,\n      colour =\"gray25\"),\n    plot.background = element_rect(fill = \"#FAE5C6\")\n  )\n)"
+  },
+  {
+    "objectID": "posts/2025-01-24/index.html",
+    "href": "posts/2025-01-24/index.html",
+    "title": "Jardins partagés à Antibes",
+    "section": "",
+    "text": "Ce poste rend compte de la surface des jardins partagés à Antibes Juan-les-Pins. Chaque rectangle est proportionnel à la surface en mètres carrés."
+  },
+  {
+    "objectID": "posts/2025-01-24/index.html#import",
+    "href": "posts/2025-01-24/index.html#import",
+    "title": "Jardins partagés à Antibes",
+    "section": "Import",
+    "text": "Import\n\nlibrary(tidyverse)\nlibrary(readxl)\nlibrary(treemapify)\nlibrary(grid)\n\ndate_caption &lt;- \"27 septembre 2024\"\nsource(\"tools/themes.R\")\n\njardins &lt;- read_csv(\"posts/2025-01-24/data/antibes-jardins-partages.csv\")\nglimpse(jardins)"
+  },
+  {
+    "objectID": "posts/2025-01-24/index.html#clean",
+    "href": "posts/2025-01-24/index.html#clean",
+    "title": "Jardins partagés à Antibes",
+    "section": "Clean",
+    "text": "Clean\n\njardins$site[jardins$site == 'Saint Maymes'] &lt;- \n  c(\"Saint Maymes 1\", \"Saint Maymes 2\") # give a number to each duplicate value"
+  },
+  {
+    "objectID": "posts/2025-01-24/index.html#analysis",
+    "href": "posts/2025-01-24/index.html#analysis",
+    "title": "Jardins partagés à Antibes",
+    "section": "Analysis",
+    "text": "Analysis\n\njardins_tree &lt;-\njardins %&gt;% \n  summarize(site, surface_m2) \njardins_tree\n\n# A tibble: 8 × 2\n  site           surface_m2\n  &lt;chr&gt;               &lt;dbl&gt;\n1 Parc Estagnol         800\n2 Saint Maymes 1       1100\n3 Saint Maymes 2        500\n4 Courbe                420\n5 La Colle             1600\n6 Rabiac/Carriat        455\n7 Fontonne              613\n8 Val Claret            591"
+  },
+  {
+    "objectID": "posts/2025-01-24/index.html#plot",
+    "href": "posts/2025-01-24/index.html#plot",
+    "title": "Jardins partagés à Antibes",
+    "section": "Plot",
+    "text": "Plot\n\nplot_jardin_tree &lt;- \njardins_tree %&gt;%\n  ggplot(aes(fill = site, area = surface_m2, label = paste0(site,sep = \"\\n\", surface_m2, \" m²\"))) +\n  geom_treemap(color = \"#FAE5C6\", size = 5,  alpha = 1) +\n  geom_treemap_text(fontface = \"bold\", \n                    colour = \"white\", \n                    place = \"center\",\n                    family = setfont,\n                    grow = FALSE) + \n  scale_fill_manual(values = custom_palette_treemap) +\n  theme(legend.position = \"none\")\n\nplot_jardin_tree &lt;-\nplot_jardin_tree +\n  labs(title = \"Les jardins partagés à Antibes Juan-les-Pins\",\n       subtitle = \"Surface des jardins partagés en m2\",\n       caption = social_caption3) + tt5"
+  },
+  {
+    "objectID": "posts/2025-01-24/index.html#render",
+    "href": "posts/2025-01-24/index.html#render",
+    "title": "Jardins partagés à Antibes",
+    "section": "Render",
+    "text": "Render\n\nplot_jardin_tree"
+  }
+]

@@ -1,0 +1,181 @@
+---
+title: "Qualité des metadonnées"
+author: "Antibes Data"
+date: "2025-01-17"
+categories: [open data, antibes]
+image: "plots/qualite_donnees_m2.png"
+abstract: Score de qualité des données publiées par trois villes de la Côte d'Azur
+editor_options: 
+  chunk_output_type: console
+---
+
+# Introduction
+
+Un score de qualité des métadonnées a été mis en place sur data.gouv.fr pour aider les utilisateurs à identifier les jeux de données de qualité et encourager les producteurs à améliorer leurs contributions. [Les 7 critères de cet indicateur sont définis sur data.gouv.fr](https://guides.data.gouv.fr/guides-open-data/guide-qualite/ameliorer-la-qualite-dun-jeu-de-donnees-en-continu/ameliorer-le-score-de-qualite-des-metadonnees)
+
+![Indicateur tel qu'il est présenté sur data.gouv.fr](kpi.png){fig-align="left" width="50%"}
+
+Ce post propose une visualisation du score pour trois villes de la Côte d'Azur qui ont publié des données:
+
+-   Antibes
+-   Cannes
+-   Nice
+
+# Résultats
+
+![](plots/qualite_donnees_m.png){fig-align="center"}
+
+![](plots/qualite_donnees_m2.png)
+
+# Code
+
+## Import
+
+```{r}
+#| message: false
+#| warning: false
+
+library(tidyverse)
+library(paletteer)
+library(patchwork)
+library(gt)
+
+date_caption <- "20 janvier 2025"
+source("tools/themes.R") # themes
+
+
+df_antibes <- read_csv("posts/2025-01-17/data/results_antibes.csv")
+df_cannes <- read_csv("posts/2025-01-17/data/results_cannes.csv")
+df_nice <- read_csv("posts/2025-01-17/data/results_nice.csv")
+
+```
+
+## Create dataframe
+
+```{r}
+
+# quick approach for col chart
+df <-
+    tibble(
+      antibes = mean(df_antibes$values),
+      cannes = mean(df_cannes$values),
+      nice = mean(df_nice$values)
+    )
+
+df <-
+    pivot_longer(df, 
+                 cols = everything(), 
+                 names_to = "ville", 
+                 values_to = "mean_quality")
+
+
+# other approach for violin plot
+df_point_antibes <- df_antibes %>% mutate(ville = "Antibes")
+df_point_cannes <- df_cannes %>% mutate(ville = "Cannes")
+df_point_nice <- df_nice %>% mutate(ville = "Nice")
+
+df_point <- bind_rows(df_point_antibes, 
+                      df_point_cannes, 
+                      df_point_nice)
+
+df_matrix <-
+df_point %>% 
+  group_by(ville) %>%
+  summarise(quantité = n(), qualité= mean(values)) %>%
+  mutate(qualité = scales::percent(qualité))
+
+gt(df_matrix)
+```
+
+## Clean
+
+```{r}
+# standardize cols names and variables
+  df <-
+  df %>%
+    mutate(across(c(ville, mean_quality), str_to_title)) %>%
+    mutate(mean_quality = as.numeric(mean_quality)) %>%
+    mutate(ville = as_factor(ville))
+  
+# adding useful cols
+  df <-
+    df %>% 
+    mutate(taux = scales::percent(mean_quality))
+```
+
+## Plot
+
+```{r}
+#| message: false
+#| warning: false
+#| output: false
+# col chart
+plot_col <-
+ df %>%
+    ggplot(aes(x = ville, y = mean_quality))+
+      geom_col(aes(y = 1), alpha = 0.4) +
+      geom_col(aes(fill = mean_quality)) +
+      geom_text(aes(label = taux),
+                    vjust = 2,
+                     hjust = 0.4,
+                    size = 8,
+                    color = "black",
+                    fontface = "bold",
+                    family = setfont) + tt6
+
+# violin plot
+plot_violin <-
+df_point %>%
+  ggplot(aes(x = ville, y = values, color = values)) +
+  geom_violin(color = NA, fill = "gray80")+ 
+  geom_jitter(alpha = 0.8, size = 2.5) +
+  scale_y_continuous(labels = scales::label_percent(), breaks = scales::breaks_extended(n = 6), limits = c(0,1)) +
+  tt9
+
+# labels and colors   
+plot_col <-
+plot_col +
+  scale_y_discrete(expand = c(0, 0)) + # force origin at 0
+  scale_fill_paletteer_c("ggthemes::Red-Green-Gold Diverging") +
+  labs(
+    title = "Antibes en tête dans la qualité des données",
+    subtitle = "Qualité des metadonnées publiées sur opendata.gouv.fr. moyenne en (%)",
+    caption = social_caption2) 
+
+
+plot_violin <-
+plot_violin +
+    scale_color_paletteer_c("ggthemes::Red-Green-Gold Diverging") +
+    labs(
+      title = "Antibes en tête dans la qualité des données",
+      subtitle = "Qualité des metadonnées publiées sur opendata.gouv.fr (%) <br>Chaque point représente un jeu de données",
+      caption = social_caption2) 
+
+```
+
+## Render
+
+```{r}
+#| fig.align: center
+#| message: false
+#| warning: false
+#| fig-height: 6
+#| fig-width: 6
+
+
+plot_col 
+```
+
+```{r}
+#| fig.align: center
+#| fig-height: 10
+#| fig-width: 7
+#| message: false
+#| warning: false
+
+plot_violin
+```
+
+## Source
+
+[data.gouv.fr](data.gouv.fr) `{r} date_caption`

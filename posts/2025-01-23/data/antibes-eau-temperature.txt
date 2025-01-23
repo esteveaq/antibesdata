@@ -1,0 +1,18 @@
+Points de prise de tempÈrature
+
+Est du cap d'antibes
+Longitude 7.1295
+Latitude 43.5827
+
+Ouest du cap díantibes
+Longitude 7.1222
+Latitude 43.5544
+
+
+Description
+
+Il s’agit de la température de l’eau de mer relevée en deux points d’Antibes Juan-les-Pins, dits de la Gravette (Est cap) et des Ondes (Ouest cap), depuis juin 2020.
+Les échantillons sont pris aux deux points de référence précisés dans le fichier antibes_eau_temperature.txt dans 1 mètre d'eau.
+Les prélèvements ont lieu dans la journée, parfois le matin, parfois l'après-midi.
+La prise de température est effectuée avec un thermomètre Testo 103 selon la norme DIN EN ISO 9001- Plage de moins 30 °C à 220 °C.
+Pour la réutilisation du présent jeu, dont les conditions (licence ouverte / open licence 2.0) sont très souples, il est en revanche obligatoire de mentionner la paternité de l'information sous la forme suivante : "Source : Ville d'Antibes, disponible sur data.gouv.fr, mise à jour du [indiquer la dernière date de mise à jour]". Merci

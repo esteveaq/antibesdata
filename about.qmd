@@ -1,0 +1,21 @@
+---
+title: "A propos"
+image: profile.jpg
+about:
+  template: marquee
+  links:
+    - icon: github
+      text: Github
+      href: https://github.com/esteveaq/antibesdata
+    - icon: twitter-x
+      text: Twitter
+      href: https://x.com/AntibesData
+---
+
+### Pourquoi ce site ?
+
+Ce blog vise à promouvoir l'Open Data dans la ville d'Antibes Juan-Les-Pins dans un but informatif et éducatif. La plupart des données sont issues de data.gouv.fr et publiées par la ville.
+
+### En savoir plus
+
+Le code source est disponible sur [le dépôt GitHub ici.](https://github.com/esteveaq/antibesdata)

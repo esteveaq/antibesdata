@@ -1,0 +1,52 @@
+project:
+  type: website
+  execute-dir: project
+  output-dir: docs
+  render:
+    - "*.qmd"
+    - "!index_template.qmd"
+
+website:
+  title: "Antibes Data"
+  site-url: https://esteveaq.github.io/antibesdata
+  description: "Open Data Antibes"
+  page-navigation: true
+  back-to-top-navigation: true
+  google-analytics: "G-N5NXXVM3LQ" 
+  cookie-consent:
+     type: implied
+     style: simple
+  page-footer: 
+    center: 
+      - text: "Antibes Data - 2025"
+      - icon: github
+        href: https://github.com/esteveaq/antibesdata
+      - icon: twitter-x 
+        href: https://x.com/AntibesData
+    background: light
+    border: true
+  navbar:
+    #background: "#FAE5C6"
+    right:
+      - text: A propos
+        href: about.qmd
+      - icon: twitter-x
+        href: https://x.com/AntibesData
+      - icon: github
+        href: https://github.com/esteveaq/antibesdata
+
+
+lang: fr
+format:
+  html:
+    include-in-header:
+      - file: header.html
+    self-contained: true
+    code-summary: "Show the code"
+    code-block-bg: true
+    code-block-border-left: "#93B6D6"
+    theme: cosmo
+    css: styles.css
+
+editor: visual
+
