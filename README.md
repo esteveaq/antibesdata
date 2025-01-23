@@ -1,6 +1,4 @@
-::: {.callout-note appearance="minimal"}
-English
-:::
+*English*
 
 # Project
 
@@ -26,19 +24,13 @@ Explore the project and view the visualizations on our website: <https://esteve
 
 ------------------------------------------------------------------------
 
-::: {.callout-note appearance="minimal"}
-Français
-:::
+*Français*
 
 # Projet
 
 ## Introduction
 
 Ce projet open data vise à promouvoir l'open data dans la ville d'**Antibes Juan-Les-Pins** et à encourager la publication de nouveaux jeux de données de qualité. L'objectif est de rendre les données plus accessibles et à des fins éducatives et informatives. Cette initiative s'inscrit dans la lignée de la plateforme [data.gouv.fr.](https://www.data.gouv.fr/fr/)
-
-## Aperçu
-
-![](cover.jpg)
 
 ## Traitement et Visualisation des Données
 
