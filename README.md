@@ -8,15 +8,15 @@
 -   [Visualization](#visualization)
 -   [Explore](#explore)
 
-## Introduction
+## Introduction {#introduction}
 
 This project exists to promote Open Data in the city of **Antibes Juan-Les-Pins, France** with visualizations. The goal is to encourage the publication of quality datasets. This initiative is in line with the [data.gouv.fr](https://www.data.gouv.fr/fr/) platform. Datasets are from : [Ville d'Antibes](https://www.data.gouv.fr/fr/organizations/ville-dantibes/)
 
-## Overview
+## Overview {#overview}
 
 [![](cover.jpeg)](https://esteve.aqachmar.org/antibesdata/)
 
-## Data
+## Data {#data}
 
 | Dataset | Description (French) |
 |------------------------------------|------------------------------------|
@@ -32,7 +32,7 @@ This project exists to promote Open Data in the city of **Antibes Juan-Les-Pins,
 
 Most of the visualizations, as well as data processing and cleaning, are performed using [R](https://guides.data.gouv.fr/reutiliser-des-donnees/guide-traitement-et-analyse-de-donnees/analyser-des-donnees/analyser-des-donnees-avec-r), with `ggplot2` the `tidyverse`
 
-## Explore
+## Explore {#explore}
 
 See visualizations here : <https://esteveaq.github.io/antibesdata>
 
