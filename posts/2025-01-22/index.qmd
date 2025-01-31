@@ -11,9 +11,13 @@ editor_options:
 
 # Introduction
 
-Ce poste propose une analyse statistique des naissances à Antibes sur la période 2013-2023. Un graphe en barres décrit le volume des naissances, et les segments décrivent la croissance moyenne annuelle des prénoms (en %). Au top des prénoms en volume, on trouve **Adam** pour les garçons avec 72 naissances et **Emma** pour les filles avec 53 naissances. Au top des prénoms en croissance moyenne annuelle on trouve **Youssef** (+79%) pour les garçons et **Luna** (+106%) pour les filles.
+Ce poste propose une analyse statistique des naissances à Antibes Juan-les-Pins sur la période 2013-2023. Un graphe en barres décrit le volume des naissances, et les segments décrivent la croissance moyenne annuelle des prénoms (en %).
 
 # Résultats
+
+Au top des prénoms en volume, on trouve **Adam** pour les garçons avec 72 naissances et **Emma** pour les filles avec 53 naissances. Au top des prénoms en croissance moyenne annuelle on trouve **Youssef** (+79%) pour les garçons et **Luna** (+106%) pour les filles.
+
+# Visualisation
 
 ![](plots/prenoms_m2.png){fig-align="center"}
 

@@ -15,6 +15,10 @@ Ce poste rend compte de la surface des jardins partagés à Antibes Juan-les-Pin
 
 # Résultats
 
+**La Colle** et **Saint Maymes** sont les deux plus grand jardins partagés sur les huits qui sont répertoriés dans la commune.
+
+# Visualisation
+
 ![](plots/plot_jardin_tree_m.jpg){fig-align="center"}
 
 # Code

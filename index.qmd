@@ -1,6 +1,6 @@
 ---
 title: "Open Data à Antibes"
-subtitle: "Valoriser les données publiques"
+subtitle: "Visualiser les données ouvertes"
 listing:
   contents: posts
   fields: [image, date, title, description, reading-time]

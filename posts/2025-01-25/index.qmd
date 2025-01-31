@@ -4,14 +4,18 @@ author: "Antibes Data"
 date: "2025-01-25"
 categories: [open data, antibes]
 image: "plots/musees.gif"
-abstract: Hausse record des visiteurs post-COVID pour le Musée Picasso et le Musée de l'Archéologie 
+abstract: Hausse record des visiteurs post-COVID
 ---
 
 # Introduction
 
-Ce poste analyse le nombre de visiteurs dans les musées d'Antibes depuis 2008. Une animation est réalisée pour illustrer la baisse durant le COVID. Puis la reprise à des niveaux records. Les musées concernés sont le Musée Picasso et le Musée de l'Archéologie. Le nombre de visiteurs est agrégé sur ces deux musées.
+Ce poste analyse le nombre de visiteurs dans les musées d'Antibes depuis 2008. Une animation est réalisée pour illustrer la baisse durant le COVID puis la reprise à des niveaux records. Les musées concernés sont le **Musée Picasso** et le **Musée de l'Archéologie**. Le nombre de visiteurs est agrégé sur ces deux musées.
 
 # Résultats
+
+La fréquentation des musées atteints des niveaux records suite à la période du COVID-19.
+
+# Visualisation
 
 ![](plots/musees.gif){fig-align="center"}
 

@@ -23,6 +23,10 @@ Ce post propose une visualisation du score pour trois villes de la Côte d'Azur 
 
 # Résultats
 
+Antibes est en tête dans la qualité des données par rapport aux autres grandes villes du département des Alpes Maritimes (06), avec une qualité des métadonnées significativement supérieure.
+
+# Visualisation
+
 ![](plots/qualite_donnees_m.png){fig-align="center"}
 
 ![](plots/qualite_donnees_m2.png)

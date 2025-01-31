@@ -11,9 +11,19 @@ editor_options:
 
 # Introduction
 
+Analyse du nombre d'activités sportives répertoriées à Antibes Juan-les-Pins entre 2023 et 2020.
+
 # Résultats
 
+L'année 2022 a été particulièrement active en terme d'activités sportives.\
+L'organisateur le plus actif est la **Direction des sports de la ville d'Antibes**.\
+Le lieux le plus actif est le **Clos Borriglion**.
+
+# Visualisation
+
 ![](plots/animations_sportives_total.png){fig-align="center"}
+
+![](plots/orgs_lieux.png)
 
 # Code
 

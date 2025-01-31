@@ -15,6 +15,10 @@ Visualisation des données publiées sur data.gouv.fr par la ville d'Antibes Jua
 
 # Résultats
 
+Après Jean Baptiste-ROSTAN (1831-1865), le maire d'Antibes avec la plus grande longévité est Jean LEONETTI (1995-2026).
+
+# Visualisation
+
 ![](plots/2025-01-09_maires_m.png){fig-align="center"}
 
 # Code

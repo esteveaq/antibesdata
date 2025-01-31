@@ -4,7 +4,7 @@
     "href": "posts/2025-01-25/index.html",
     "title": "Fréquentation des musées d’Antibes",
     "section": "",
-    "text": "Ce poste analyse le nombre de visiteurs dans les musées d’Antibes depuis 2008. Une animation est réalisée pour illustrer la baisse durant le COVID. Puis la reprise à des niveaux records. Les musées concernés sont le Musée Picasso et le Musée de l’Archéologie. Le nombre de visiteurs est agrégé sur ces deux musées."
+    "text": "Ce poste analyse le nombre de visiteurs dans les musées d’Antibes depuis 2008. Une animation est réalisée pour illustrer la baisse durant le COVID puis la reprise à des niveaux records. Les musées concernés sont le Musée Picasso et le Musée de l’Archéologie. Le nombre de visiteurs est agrégé sur ces deux musées."
   },
   {
     "objectID": "posts/2025-01-25/index.html#import",
@@ -39,7 +39,7 @@
     "href": "posts/2025-01-23/index.html",
     "title": "Température de l’eau au cap d’Antibes",
     "section": "",
-    "text": "Distribution des revelés de température de l’eau au cap d’Antibes (Celsius), par mois et par année."
+    "text": "Distribution des relevés de température de l’eau au cap d’Antibes (Celsius), par mois et par année."
   },
   {
     "objectID": "posts/2025-01-23/index.html#import",
@@ -179,7 +179,7 @@
     "href": "index.html",
     "title": "Open Data à Antibes",
     "section": "",
-    "text": "Fréquentation des musées d’Antibes\n\n\n\n\n\nHausse record des visiteurs post-COVID pour le Musée Picasso et le Musée de l’Archéologie\n\n\n\n\n\n25 janv. 2025\n\n\n5 min.\n\n\n\n\n\n\n\n\n\n\n\n\nJardins partagés à Antibes\n\n\n\n\n\nSurface des jardins partagés en m2\n\n\n\n\n\n24 janv. 2025\n\n\n2 min.\n\n\n\n\n\n\n\n\n\n\n\n\nTempérature de l’eau au cap d’Antibes\n\n\n\n\n\nDistribution des revelés de température de l’eau au cap d’Antibes\n\n\n\n\n\n23 janv. 2025\n\n\n8 min.\n\n\n\n\n\n\n\n\n\n\n\n\nNaissances et prénoms à Antibes\n\n\n\n\n\nPrénoms des nouveaux-nés déclarés à l’état-civil à Antibes.\n\n\n\n\n\n22 janv. 2025\n\n\n6 min.\n\n\n\n\n\n\n\n\n\n\n\n\nActivités sportives à Antibes\n\n\n\n\n\nEvolution, lieux et organisateurs des activités sportives à Antibes Juan-Les-Pins\n\n\n\n\n\n21 janv. 2025\n\n\n7 min.\n\n\n\n\n\n\n\n\n\n\n\n\nMandats des maires d’Antibes du XIXème siècle à nos jours\n\n\n\n\n\nDurée des mandats des maires d’Antibes du XIXème siècle à nos jours\n\n\n\n\n\n20 janv. 2025\n\n\n7 min.\n\n\n\n\n\n\n\n\n\n\n\n\nQualité des metadonnées\n\n\n\n\n\nScore de qualité des données publiées par trois villes de la Côte d’Azur\n\n\n\n\n\n17 janv. 2025\n\n\n4 min.\n\n\n\n\n\n\nAucun article correspondant\n\n Retour au sommet"
+    "text": "Fréquentation des musées d’Antibes\n\n\n\n\n\nHausse record des visiteurs post-COVID\n\n\n\n\n\n25 janv. 2025\n\n\n5 min.\n\n\n\n\n\n\n\n\n\n\n\n\nJardins partagés à Antibes\n\n\n\n\n\nSurface des jardins partagés en m2\n\n\n\n\n\n24 janv. 2025\n\n\n2 min.\n\n\n\n\n\n\n\n\n\n\n\n\nTempérature de l’eau au cap d’Antibes\n\n\n\n\n\nDistribution des revelés de température de l’eau\n\n\n\n\n\n23 janv. 2025\n\n\n8 min.\n\n\n\n\n\n\n\n\n\n\n\n\nNaissances et prénoms à Antibes\n\n\n\n\n\nPrénoms des nouveaux-nés déclarés à l’état-civil à Antibes.\n\n\n\n\n\n22 janv. 2025\n\n\n6 min.\n\n\n\n\n\n\n\n\n\n\n\n\nActivités sportives à Antibes\n\n\n\n\n\nEvolution, lieux et organisateurs des activités sportives à Antibes Juan-Les-Pins\n\n\n\n\n\n21 janv. 2025\n\n\n7 min.\n\n\n\n\n\n\n\n\n\n\n\n\nMandats des maires d’Antibes du XIXème siècle à nos jours\n\n\n\n\n\nDurée des mandats des maires d’Antibes du XIXème siècle à nos jours\n\n\n\n\n\n20 janv. 2025\n\n\n7 min.\n\n\n\n\n\n\n\n\n\n\n\n\nQualité des metadonnées\n\n\n\n\n\nScore de qualité des données publiées par trois villes de la Côte d’Azur\n\n\n\n\n\n17 janv. 2025\n\n\n4 min.\n\n\n\n\n\n\nAucun article correspondant\n\n Retour au sommet"
   },
   {
     "objectID": "posts/2025-01-20/index.html",
@@ -228,7 +228,7 @@
     "href": "posts/2025-01-22/index.html",
     "title": "Naissances et prénoms à Antibes",
     "section": "",
-    "text": "Ce poste propose une analyse statistique des naissances à Antibes sur la période 2013-2023. Un graphe en barres décrit le volume des naissances, et les segments décrivent la croissance moyenne annuelle des prénoms (en %). Au top des prénoms en volume, on trouve Adam pour les garçons avec 72 naissances et Emma pour les filles avec 53 naissances. Au top des prénoms en croissance moyenne annuelle on trouve Youssef (+79%) pour les garçons et Luna (+106%) pour les filles."
+    "text": "Ce poste propose une analyse statistique des naissances à Antibes Juan-les-Pins sur la période 2013-2023. Un graphe en barres décrit le volume des naissances, et les segments décrivent la croissance moyenne annuelle des prénoms (en %)."
   },
   {
     "objectID": "posts/2025-01-22/index.html#import",
@@ -313,5 +313,12 @@
     "title": "Jardins partagés à Antibes",
     "section": "Render",
     "text": "Render\n\nplot_jardin_tree"
+  },
+  {
+    "objectID": "posts/2025-01-21/index.html",
+    "href": "posts/2025-01-21/index.html",
+    "title": "Activités sportives à Antibes",
+    "section": "",
+    "text": "Analyse du nombre d’activités sportives répertoriées à Antibes Juan-les-Pins entre 2023 et 2020."
   }
 ]
