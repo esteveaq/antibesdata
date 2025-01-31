@@ -1,6 +1,6 @@
 ---
 title: "Fréquentation des musées d'Antibes"
-author: "Antibes Data"
+# author: "Antibes Data"
 date: "2025-01-25"
 categories: [open data, antibes]
 image: "plots/musees.gif"

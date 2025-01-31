@@ -1,6 +1,6 @@
 ---
 title: "Template"
-author: "Antibes Data"
+# author: "Antibes Data"
 date: "2025-01-01"
 categories: [open data, antibes]
 image: "plots/"

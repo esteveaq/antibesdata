@@ -1,6 +1,6 @@
 ---
 title: "Jardins partagés à Antibes"
-author: "Antibes Data"
+# author: "Antibes Data"
 date: "2025-01-24"
 categories: [open data, antibes]
 image: "plots/plot_jardin_tree_m.jpg"

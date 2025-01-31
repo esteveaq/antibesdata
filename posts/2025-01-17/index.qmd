@@ -1,6 +1,6 @@
 ---
 title: "Qualité des metadonnées"
-author: "Antibes Data"
+# author: "Antibes Data"
 date: "2025-01-17"
 categories: [open data, antibes]
 image: "plots/qualite_donnees_m2.png"

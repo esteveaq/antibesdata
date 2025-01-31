@@ -1,6 +1,6 @@
 ---
 title: "Mandats des maires d'Antibes du XIXème siècle à nos jours"
-author: "Antibes Data"
+# author: "Antibes Data"
 date: "2025-01-20"
 categories: [open data, antibes]
 image: "plots/2025-01-09_maires_m.png"

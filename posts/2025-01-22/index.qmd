@@ -1,6 +1,6 @@
 ---
 title: "Naissances et prénoms à Antibes"
-author: "Antibes Data"
+# author: "Antibes Data"
 date: "2025-01-22"
 categories: [open data, antibes]
 image: "plots/prenoms_m2.png"

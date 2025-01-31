@@ -1,7 +1,16 @@
-.Rproj.user
-.Rhistory
-.RData
-.Ruserdata
-README.html
-README_files/
+# Ignore RStudio project-specific files
+.Rproj.user/  # RStudio project settings and metadata
+.Rhistory     # R command history
+.RData        # R workspace file
+.Ruserdata    # R user-specific data
+
+# Ignore Python scripts in the 'tools' directory
+tools/*.py    # Ignore data cleaning scripts written in Python
+
+# Ignore Quarto-generated files
+README.html   # Quarto-generated HTML file
+README_files/ # Directory containing output files from Quarto processing
+.quarto/      # Quarto cache and settings directory
+
 /.quarto/
+.Rproj.user

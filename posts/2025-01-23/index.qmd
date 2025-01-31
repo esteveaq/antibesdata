@@ -1,6 +1,6 @@
 ---
 title: "Température de l'eau au cap d'Antibes"
-author: "Antibes Data"
+# author: "Antibes Data"
 date: "2025-01-23"
 categories: [open data, antibes]
 image: "plots/temperature eau_mois_m.png"
@@ -15,7 +15,7 @@ Distribution des relevés de température de l'eau au cap d'Antibes (Celsius), p
 
 # Résultats
 
-En été l'ouest du cap est légèrement plus chaud que l'est du cap. \
+En été l'ouest du cap est légèrement plus chaud que l'est du cap.\
 En hiver l'est du cap semble légèrement moins froid que l'ouest du cap.\
 Limite: ces différences ne sont pas très significatives.
 

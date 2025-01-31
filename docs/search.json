@@ -77,6 +77,13 @@
     "text": "Render\n\nplot_ridges_year_final &lt;-  \nplot_ridges_year + \n    facet_wrap(~region, ncol =1, strip.position = \"top\", scales = \"free\") +\n   labs(\n     title = \"Baignade : l'année 2024 légèrement plus chaude que les précédentes\",\n     subtitle = \"Distribution des revelés de température de l'eau au cap d'Antibes (Celsius), par années\",\n     x = \"Température (Celsius)\",\n     caption = social_caption2) + tt8\n  \nplot_ridges_month_final &lt;-    \nplot_ridges_month + \n  facet_wrap(~region, ncol =1, strip.position = \"top\", scales = \"free\") +\n  labs(\n    title = \"Antibes Juan-Les-Pins baignable une grande partie de l'année\",\n    subtitle = \"Distribution des revelés de température de l'eau au cap d'Antibes (Celsius), par mois\",\n    x = \"Température (Celsius)\",\n    caption = social_caption2) + tt8\n\n\nplot_ridges_month_final  \n\n\n\n\n\n\n\n\n\nplot_ridges_year_final\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n\n\nSmoothing with a moving average method using slide_dbl() will not plot correctly because there are irregular missing dates in the data. \nFixing this would require filling missing values with tidyr::complete() and then filling upwards the NA values or computing them, or using library(zoo) for something like rollmean(df_bind_clean$temperature, 3, fill = \"extend\"). \nWe are chosing to work with actual values only for this analysis."
   },
   {
+    "objectID": "posts/2025-01-21/index.html",
+    "href": "posts/2025-01-21/index.html",
+    "title": "Activités sportives à Antibes",
+    "section": "",
+    "text": "Analyse du nombre d’activités sportives répertoriées à Antibes Juan-les-Pins entre 2023 et 2020."
+  },
+  {
     "objectID": "posts/2025-01-21/index.html#import",
     "href": "posts/2025-01-21/index.html#import",
     "title": "Activités sportives à Antibes",
@@ -313,12 +320,5 @@
     "title": "Jardins partagés à Antibes",
     "section": "Render",
     "text": "Render\n\nplot_jardin_tree"
-  },
-  {
-    "objectID": "posts/2025-01-21/index.html",
-    "href": "posts/2025-01-21/index.html",
-    "title": "Activités sportives à Antibes",
-    "section": "",
-    "text": "Analyse du nombre d’activités sportives répertoriées à Antibes Juan-les-Pins entre 2023 et 2020."
   }
 ]

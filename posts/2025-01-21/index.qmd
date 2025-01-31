@@ -1,6 +1,6 @@
 ---
 title: "Activités sportives à Antibes"
-author: "Antibes Data"
+# author: "Antibes Data"
 date: "2025-01-21"
 categories: [open data, antibes]
 image: "plots/animations_sportives_total.png"
