@@ -1,5 +1,5 @@
 ---
-title: "Open Data à Antibes"
+title: "Open Data à Antibes Juan-les-Pins"
 subtitle: "Visualiser les données ouvertes"
 listing:
   contents: posts

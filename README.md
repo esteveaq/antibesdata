@@ -19,7 +19,7 @@ This project exists to promote Open Data in the city of **Antibes Juan-Les-Pins,
 ## Data {#data}
 
 | Dataset | Description (French) |
-|------------------------------------|------------------------------------|
+|----|----|
 | [Fréquentation des Musées de France](https://www.data.gouv.fr/fr/datasets/frequentation-des-musees-de-france-de-la-ville-dantibes/) | Fréquentation totale, payante et gratuite des Musées de France de la Ville d’Antibes depuis 2001. |
 | [Jardins partagés](https://www.data.gouv.fr/fr/datasets/jardins-partages-a-antibes-juan-les-pins/) | Liste des jardins partagés, avec l'indication de leur capacité, situation géographique et gestionnaires. |
 | [Température de l’eau de mer](https://www.data.gouv.fr/fr/datasets/temperature-de-leau-de-mer-a-antibes-juan-les-pins/) | Température de l’eau de mer relevée en deux points d’Antibes Juan-les-Pins, depuis juin 2020. |
